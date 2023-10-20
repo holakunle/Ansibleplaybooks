@@ -1,0 +1,69 @@
+# FILE MANAGEMENT WITH DIRECTORY
+# FILE MANAGEMENT
+
+- name: ( fill in the name of your play)
+  hosts: (your inverntory name)
+  tasks:
+
+# This is the first task to ping the servers and ensure connectivity
+
+    - name: Ping my host
+      ansible.builtin.ping:
+
+# This modules create a file directory using the file module
+# Specify Path to directory, state can also be changed to file please read ansible documentation for more
+# owner , mode and group can also be changed. do not use root except specified.
+
+    - name: creating a directory called ......
+      ansible.builtin.file:
+        path: /..................
+        state: directory         
+        mode: '0755'
+        owner: root               
+        group: root
+
+# This tasks copies a single file only
+
+    - name: copy a single file to directory ......
+      ansible.builtin.copy:
+        src: /........................... 
+        dest: /..........................
+        owner:
+        group:
+        mode:
+# This tasks copies with the use of the module loop
+
+  - name: copy multiple files from a same directory, wildcard can also be used
+      tags: move,docker
+      become: true
+      ansible.builtin.copy:
+        src: "{{item}}"
+        dest: /...............................specify the source directory
+        owner: root
+        group: root
+        mode: '0644'
+      loop:
+        - certificate.crt...........................
+        - certificate.pem...........................
+        - private.key...............................
+        - orthanc-bg.png............................
+        - orthanc-logo.png..........................(just a sample file please remove and add your files)
+        - orthanc-logo-text.png.....................
+        - orthanc-logo-text-shadow.png..............
+        - docker-compose.yml........................
+        - ohif-app-config.js........................
+        - permissions.jsonc.........................
+
+
+# This unarchive modules downloads and extracts file on a remote source.
+
+     - name: download a zipped file from a remote location x and unzip
+      unarchive:
+        src: https://..............................
+        dest: ...................................................
+        remote_src: yes
+        mode: 0644
+        owner: root
+        group: root
+  
+    

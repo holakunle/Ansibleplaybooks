@@ -1,0 +1,45 @@
+#  This is a bootstrap setup playbook that sets up the server initialy and makes it available for use
+#  This is the list of tasks that will be handled by the playbook
+
+
+- name: ( fill in the name of your play)
+  hosts: (your inverntory name)
+  become: true
+  tasks:
+    - name: Ping my host
+      ansible.builtin.ping:
+
+# The second task is to update and upgrade the distribution
+
+    - name: update repo and upgrade distribution
+      ansible.builtin.apt: 
+        update_cache: true
+        upgrade: dist
+      when: ansible_distribution == "Ubuntu"
+
+# This creats a new user on the defined hosts
+
+    - name: creates a new user called hoyfire
+      ansible.builtin.user:
+        name: holyfire
+        group: root
+
+    - name: copy the sudoers file for the new user
+      ansible.builtin.copy:
+        src:
+        dest: /etc/sudoers.d/holyfire
+        owner: root
+        group: root
+        mode: 0440
+
+# check if a reboot is required 
+    - name: Check if a reboot is required
+      ansible_builtin.stat:
+        path: /var/run/reboot-required
+        get_md5: no
+      register: reboot_required_file
+
+# Reboot if required 
+    - name: Reboot
+      ansible_builtin.apt:
+      when: reboot_required_file.stat.exists == true

@@ -1,0 +1,35 @@
+#  Playbook to update ubuntu on servers (listed on your host)
+#  This is the list of tasks that will be handled by the playbook
+#  Version 1 
+
+
+- name: ( fill in the name of your play)
+  hosts: (your inverntory name)
+  tasks:
+    - name: Ping my host
+      ansible.builtin.ping:
+
+# The second task is to update and upgrade the distribution
+
+    - name: update and upgrade distribution
+      ansible.builtin.apt: 
+        update_cache: true
+        upgrade: dist
+
+# install apache2 the latest version
+    - name: install apache latest version
+      ansible.builtin.apt:
+        name: apache2
+        state: latest
+
+# check if a reboot is required 
+    - name: Check if a reboot is required
+      ansible_builtin.stat:
+        path: /var/run/reboot-required
+        get_md5: no
+      register: reboot_required_file
+
+# Reboot if required 
+    - name: Reboot
+      ansible_builtin.apt:
+      when: reboot_required_file.stat.exists == true
