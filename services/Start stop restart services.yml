@@ -1,0 +1,37 @@
+# This playbook install apache, enables the services, start stoping, and restart
+
+
+- name: ( fill in the name of your play)
+  hosts: (your inverntory name)
+  tasks:
+
+    - name: This installs apache2 server on ubuntu hosts
+      tags: ubuntu
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+      when: ansible_distribution == "Ubuntu"
+      register: restart_apache2
+
+# This starts apache2 service and also enables the service on system restart
+# the line enabled makes the service enabled avaliable even on reboot
+
+    - name: start apache2 service
+      tags: ubuntu
+      ansible.builtin.service:
+        name: apache2
+        state: started
+        enabled: yes
+
+# IF a change occures on the config file of apache initiate a restart of the service
+# P:S note the module register
+
+    - name: this enables apache2 service even on system reboot
+      tags: ubuntu
+      ansible.builtin.service: 
+        name: apache2
+        state: restarted
+      when: restart_apache2.changed
+      
+      
