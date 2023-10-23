@@ -2,10 +2,12 @@
 #  This is the list of tasks that will be handled by the playbook
 
 
-- name: ( fill in the name of your play)
-  hosts: (your inverntory name)
+- name: update cache and upgrade
+  hosts: productionserver
+  remote_user: ubuntu
   become: true
   tasks:
+  
     - name: Ping my host
       ansible.builtin.ping:
 
@@ -19,18 +21,11 @@
 
 # This creats a new user on the defined hosts
 
-    - name: creates a new user called hoyfire
+    - name: creates a new user called holakunle
       ansible.builtin.user:
-        name: holyfire
+        name: holakunle
         group: root
 
-    - name: copy the sudoers file for the new user
-      ansible.builtin.copy:
-        src:
-        dest: /etc/sudoers.d/holyfire
-        owner: root
-        group: root
-        mode: 0440
 
 # check if a reboot is required 
     - name: Check if a reboot is required
