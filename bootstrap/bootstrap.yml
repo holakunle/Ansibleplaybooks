@@ -2,12 +2,12 @@
 #  This is the list of tasks that will be handled by the playbook
 
 
-- name: update cache and upgrade
+- name: update repo and upgrade
   hosts: productionserver
   remote_user: ubuntu
   become: true
   tasks:
-  
+
     - name: Ping my host
       ansible.builtin.ping:
 
