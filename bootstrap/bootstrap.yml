@@ -2,9 +2,9 @@
 #  This is the list of tasks that will be handled by the playbook
 
 
-- name: update repo and upgrade
+- name: update repositories and upgrade
   hosts: productionserver
-  remote_user: ubuntu
+  remote_user: ( define your remote user if avaliable)
   become: true
   tasks:
 
@@ -23,7 +23,7 @@
 
     - name: creates a new user called holakunle
       ansible.builtin.user:
-        name: holakunle
+        name: ( specify the name of the user u wish to create)
         group: root
 
 
