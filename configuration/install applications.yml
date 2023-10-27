@@ -3,12 +3,11 @@
 #  Version 1 
 
 
-- name: ( fill in the name of your play)
+- name: ( fill in a name for this play)
   hosts: (your inverntory name)
-  tasks:
-    - name: Ping my host
-      ansible.builtin.ping:
-
+  remote_user: ( specify one if available)
+  pre_tasks:
+    
 # The second task is to update and upgrade the distribution
 
     - name: update and upgrade distribution
@@ -17,9 +16,17 @@
         upgrade: dist
 
 # install apache2 the latest version
-    - name: install apache latest version
+    - name: install relevant applications and package manager
       ansible.builtin.apt:
-        name: apache2
+        name: 
+          - apache2
+          - wget
+          - curl
+          - unzip
+          - plocate
+          - git
+          - aptitude
+          - net-tools
         state: latest
 
 # check if a reboot is required 

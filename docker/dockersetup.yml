@@ -1,52 +1,24 @@
-# This playbook is about docker & docker compose setup 
+# This playbook is about docker & docker compose setup. it also contains installation of some important applications 
 # fill free to use but remember to modify the host as you use.
 # enjoy
 # tags should also be modified
 
 - name: This playbook will update, upgarde the webserver group
-  hosts: .......
+  hosts: ( define host file)
+  remote_user: ( define your remote user if avaliable)
   become: yes 
   pre_tasks:
 
-#  the first task will do aping test to ensure the servers are reachable
-
-    - name: Do a ping test to certify the status of all servers
-      tags: always,ubuntu
-      ansible.builtin.ping:
-
-# The second task will be initiated to run update and upgrade WHEN the server is ubuntu
+# The task will be initiated to run update and upgrade WHEN the server is ubuntu
 # the when statement can be targetted against any condition you wish: [ RUN ansibile all -m gather_facts --limit (supply the ip) to select any condition | grep ]
 # for more conditions           
     
-    - name: install apache2, update and upgrade
+    - name: update repositories and upgrade server
       tags: always,ubuntu
       ansible.builtin.apt:
-        name: 
-         - apache2
-         - plocate
         update_cache: true
         state: present
       when: ansible_distribution == "Ubuntu"
-
-# this play install Downloads and unzip the website
-
-    - name: This play downloads unzip
-      tags: download,ubuntu
-      ansible.builtin.apt:
-        name: 
-         - unzip
-        state: present
-
-# Use the unarchive module for extraction of zipped file.
-       
-    - name: download website and unzip
-      unarchive:
-        src: https://...........................................................................
-        dest: /var/www
-        remote_src: yes
-        mode: 0644
-        owner: root
-        group: root
 
 # verify if the system requires a reboot
 
@@ -65,11 +37,12 @@
       when: reboot_required_file.stat.exists == true
 
 
-# NEW PLAYBOOK TO SETUP DOCKER AND SOME SERVICES ON THE PRODUCTION SERVER
+# NEW PLAYBOOK TO SETUP DOCKER AND SOME SERVICES ON THE SERVER
 
 
 - name: This is a playbook to setup docker update and upgrade docker
-  hosts: productionserver
+  hosts: (specify host name)
+  remote_user: ( define remote user if avaliable)
   become: yes
   tasks:
 
@@ -85,19 +58,20 @@
 # repository url to source since docker is source is already update in 
 # ubuntu 22.4. you can also add it if you fill its needed. The when statement will only install on ubuntu
 
-    - name: install docker, wget and curl
+    - name: install docker and other packages 
       tags: docker
       ansible.builtin.apt:
         name:
           - docker.io
+          - aptitude
           - wget
-          - curl
           - unzip
         state: present
         update_cache: true
       when: ansible_distribution == "Ubuntu"
 
-# LOGIN INTO DOCKER HUB
+# LOGIN INTO DOCKER HUB ( provide login details)
+
     - name: login into docker
       community.docker.docker_login:
         username: ................
@@ -113,26 +87,17 @@
         dest: /usr/local/bin/docker-compose
         mode: '755'
 
-  # this will installs docker module for python
+  # This will installs docker module for python
 
     - name: install docker module for python
       tags: docker
       ansible.builtin.pip:
-        name: docker
-        
+        name: 
+          - docker-compose
+          - jsondiff
+          - pyyaml       
 
-  # this package installs aptitude another package manager other than apt
-
-
-    - name: install aptitude
-      tags: docker
-      ansible.builtin.apt:
-        name: aptitude
-        state: latest
-        update_cache: true
-
-
-# This installs all the neccesary packages for docker and python
+# This installs additional packages for docker and python
 
     - name: install required system packages as you wish
       tags: docker
