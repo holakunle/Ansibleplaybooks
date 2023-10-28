@@ -8,14 +8,15 @@
   remote_user: ( specify one if available)
   pre_tasks:
     
-# The second task is to update and upgrade the distribution
+# The second task will update and upgrade the distribution
 
     - name: update and upgrade distribution
       ansible.builtin.apt: 
         update_cache: true
         upgrade: dist
 
-# install apache2 the latest version
+# install apache2 and other relevant applications
+
     - name: install relevant applications and package manager
       ansible.builtin.apt:
         name: 
