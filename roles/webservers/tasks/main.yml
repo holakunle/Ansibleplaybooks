@@ -1,0 +1,19 @@
+# this play install Downloads and unzip the website
+
+    - name: This play downloads unzip
+      tags: download,ubuntu
+      ansible.builtin.apt:
+        name: 
+         - unzip
+        state: present
+
+# Use the unarchive module for extraction of zipped file.
+       
+    - name: download website and unzip
+      unarchive:
+        src: https://...........................................................................
+        dest: /var/www
+        remote_src: yes
+        mode: 0644
+        owner: root
+        group: root
