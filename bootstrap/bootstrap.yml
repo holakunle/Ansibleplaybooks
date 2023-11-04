@@ -1,4 +1,4 @@
-#  This is a bootstrap setup playbook that sets up the server initialy and makes it available for use
+#  This is a bootstrap setup playbook that sets up the servers initialy and makes it available for use
 #  This is the list of tasks that will be handled by the playbook
 
 
