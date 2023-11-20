@@ -15,7 +15,7 @@ services:
   orthanc:
     image: osimis/orthanc:23.11.0
     volumes:
-      - orthanc-storage:/var/lib/orthanc/db
+      - /data:/var/lib/orthanc/db
     restart: unless-stopped
     environment:
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
