@@ -2,6 +2,7 @@ version: "3"
 services:
 
   nginx:
+    platform: linux/amd64
     image: orthancteam/orthanc-nginx:23.11.0
     depends_on: [orthanc, orthanc-auth-service]
     restart: unless-stopped
@@ -13,6 +14,7 @@ services:
       ENABLE_ORTHANC_TOKEN_SERVICE: "true"
 
   orthanc:
+    platform: linux/amd64
     image: osimis/orthanc:23.11.0
     volumes:
       - /data:/var/lib/orthanc/db
@@ -67,6 +69,7 @@ services:
           }
         }
   orthanc-auth-service:
+    platform: linux/amd64
     image: orthancteam/orthanc-auth-service:23.9.0
     depends_on: [keycloak]
     restart: unless-stopped
@@ -85,6 +88,7 @@ services:
     volumes:
       - ./permissions.json:/orthanc_auth_service/permissions.json
   keycloak:
+    platform: linux/amd64
     image: orthancteam/orthanc-keycloak:23.11.0
     depends_on: [keycloak-db]
     restart: unless-stopped
@@ -100,6 +104,7 @@ services:
       - ./secrets/KEYCLOAK_ADMIN_PASSWORD.env
 
   ohif:
+    platform: linux/amd64
     image: orthancteam/ohif-v3:23.11.0
 #  uncomment if you want to customize ohif configuration
 #    volumes:
