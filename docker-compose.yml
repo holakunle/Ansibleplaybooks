@@ -10,7 +10,7 @@ services:
     environment:
       ENABLE_ORTHANC: "true"
       ENABLE_KEYCLOAK: "true"
-      ENABLE_OHIF: "true"
+      ENABLE_OHIF: "false"
       ENABLE_ORTHANC_TOKEN_SERVICE: "true"
 
   orthanc:
@@ -22,6 +22,9 @@ services:
     environment:
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
       DICOM_WEB_PLUGIN_ENABLED: "true"
+      VOLVIEW_PLUGIN_ENABLED: "true"
+      OHIF_PLUGIN_ENABLED: "true"
+      OSIMIS_WEB_VIEWER_PLUGIN_ENABLED: "true"
       ORTHANC__POSTGRESQL__HOST: "orthanc-db"
       ORTHANC__POSTGRESQL__ENABLE_INDEX: "true"
       ORTHANC__POSTGRESQL__INDEX_CONNECTIONS_COUNT: 10
@@ -30,7 +33,138 @@ services:
       VERBOSE_STARTUP: "true"
       ORTHANC_JSON: |
         {
-          "Name": "Orthanc",
+          "Name": "FMC MAIN SERVER 1",
+          "Plugins" : [
+             "/usr/share/orthanc/plugins/libOrthancExplorer2.so",
+             "/usr/share/orthanc/plugins/libOrthancGdcm.so",
+             "/usr/share/orthanc/plugins-available/libConnectivityChecks.so",
+             "/usr/share/orthanc/plugins-available/libDelayedDeletion.so",
+             "/usr/share/orthanc/plugins-available/libHousekeeper.so",
+             "/usr/share/orthanc/plugins-available/libOrthancAwsS3Storage.so",
+             "/usr/share/orthanc/plugins-available/libOrthancDicomWeb.so",
+             "/usr/share/orthanc/plugins-available/libOrthancNeuro.so",
+             "/usr/share/orthanc/plugins-available/libOrthancOHIF.so",
+             "/usr/share/orthanc/plugins-available/libOrthancPostgreSQLIndex.so",
+             "/usr/share/orthanc/plugins-available/libOrthancPython.so",
+             "/usr/share/orthanc/plugins-available/libOrthancVolView.so",
+             "/usr/share/orthanc/plugins-available/libOrthancWSI.so",
+             "/usr/share/orthanc/plugins-available/libStoneWebViewer.so",
+             "/usr/share/orthanc/plugins-avaliable/libOsimisWebViewer.so",
+             "/usr/share/orthanc/plugins-avaliable/libOrthancTcia.so",
+             "/usr/share/orthanc/plugins-avaliable/libOrthancTransfers.so",
+             "/usr/share/orthanc/plugins-avaliable/libOsimisWebViewerAlpha.so",
+             "/usr/share/orthanc/plugins-avaliable/libOrthancPostgreSQLStorage.so",
+             "/usr/share/orthanc/plugins-avaliable/libMultitenantDicom.so",
+             "/usr/share/orthanc/plugins-avaliable/libConnectivityChecks.so",
+             "/usr/share/orthanc/plugins-avaliable/libOrthancOdbcStorage.so"
+          ],
+          "StorageCompression" : true,
+          "MaximumStorageSize" : 0,
+          "ConcurrentJobs" : 10,
+          "JobsEngineThreadsCount" : {
+            "ResourceModification": 1
+          },
+          "MaximumPatientCount" : 0,
+          "MaximumStorageCacheSize" : 128,
+          "MaximumStorageMode" : "Recycle",
+          "LuaHeartBeatPeriod" : 0,
+          "LuaScripts" : [
+          ],
+          "WebDavDeleteAllowed" : false,
+          "WebDavUploadAllowed" : true,
+          "DicomServerEnabled" : true,
+          "DicomAet" : "FMCAM1",
+          "DicomCheckCalledAet" : true,
+          "DicomPort" : 4242,
+          "DefaultEncoding" : "Latin1",
+          "AcceptedTransferSyntaxes" : [ "1.2.840.10008.1.*" ],
+          "UnknownSopClassAccepted" : false,
+          "DicomScpTimeout" : 30,
+          "DicomTlsEnabled" : false,
+          "DicomTlsRemoteCertificateRequired" : true,
+          "DicomAlwaysAllowEcho" : true,
+          "DicomAlwaysAllowStore" : true,
+          "DicomAlwaysAllowFind" : true,
+          "DicomAlwaysAllowFindWorklist" : true,
+          "DicomAlwaysAllowGet" : true,
+          "DicomAlwaysAllowMove" : true,
+          "DicomCheckModalityHost" : false,
+          "DicomModalities" : {
+               "MICRODICOM" : [ "MICRODICOM", "192.168.43.153", 11112],
+               "RADIANT" : [ "RADIANT", "192.168.43.153", 11113]
+          },
+          "DicomModalitiesInDatabase" : false,
+          "DicomEchoChecksFind" : false,
+          "DicomScuTimeout" : 10,
+          "DicomScuPreferredTransferSyntax" : "1.2.840.10008.1.2.1",
+          "DicomThreadsCount" : 4,
+          "OrthancPeers" : {
+               "CLINICIANS_SERVER"  : [ "http://192.168.77.144:8043/", "orthanc", "orthanc" ]
+          },
+          "OrthancPeersInDatabase" : false,
+          "UserMetadata" : {
+            // "Sample" : 1024
+          },
+          "UserContentType" : {
+            // "sample" : 1024
+            // "sample2" : [ 1025, "application/pdf" ]
+          },
+          "StableAge" : 60,
+          "StrictAetComparison" : false,
+          "StoreMD5ForAttachments" : true,
+          "LimitFindResults" : 0,
+          "LimitFindInstances" : 0,
+          "LogExportedResources" : false,
+          "KeepAlive" : true,
+          "TcpNoDelay" : true,
+          "HttpThreadsCount" : 50,
+          "StoreDicom" : true,
+          "DicomAssociationCloseDelay" : 5,
+          "QueryRetrieveSize" : 100,
+          "CaseSensitivePN" : false,
+          "LoadPrivateDictionary" : true,
+          "Dictionary" : {
+          },
+          "SynchronousCMove" : true,
+          "JobsHistorySize" : 10,
+          "SaveJobs" : true,
+          "OverwriteInstances" : false,
+          "MediaArchiveSize" : 1,
+          "StorageAccessOnFind" : "Always",
+          "MetricsEnabled" : true,
+          "ExecuteLuaEnabled" : false,
+          "HttpRequestTimeout" : 30,
+          "DefaultPrivateCreator" : "",
+          "StorageCommitmentReportsSize" : 100,
+          "TranscodeDicomProtocol" : true,
+          "BuiltinDecoderTranscoderOrder" : "After",
+          "IngestTranscoding" : "1.2.840.10008.1.2.4.70",
+          "IngestTranscodingOfUncompressed" : true,
+          "IngestTranscodingOfCompressed" : true,
+          "DicomLossyTranscodingQuality" : 90,
+          "SyncStorageArea" : true,
+          "MallocArenaMax" : 5,
+          "DeidentifyLogs" : true,
+          "DeidentifyLogsDicomVersion" : "2021b",
+          "MaximumPduLength" : 16384,
+          "CheckRevisions" : false,
+          "SynchronousZipStream" : true,
+          "ZipLoaderThreads": 0,
+          "Warnings" : {
+            "W001_TagsBeingReadFromStorage": true,
+            "W002_InconsistentDicomTagsInDb": true
+          },
+          "Transfers" : {
+            "Threads" : 5,
+            "BucketSize" : 20480,
+            "CacheSize" : 128,
+            "MaxPushTransactions" : 5,
+            "MaxHttpRetries" : 0
+          },
+          "Tcia" : {
+            "Enable" : true
+          },
+
           "OrthancExplorer2": {
             "IsDefaultUI": true,
             "UiOptions": {
@@ -65,8 +199,20 @@ services:
           },
           "DicomWeb": {
             "Enable": true,
+            "Root" : "/dicom-web/",
+            "EnableWado" : true,
+            "WadoRoot" : "/wado",
+            "Host" : "localhost",
+            "Ssl" : true,
+            "StudiesMetadata" : "Full",
+            "SeriesMetadata" : "Full",
             "PublicRoot": "/orthanc/dicom-web/"
           }
+
+          "OHIF": {
+            "DataSource": "dicom-web",
+            "preload": true
+            }
         }
   orthanc-auth-service:
     platform: linux/amd64
@@ -87,6 +233,7 @@ services:
       - SECRET_KEY
     volumes:
       - ./permissions.json:/orthanc_auth_service/permissions.json
+      
   keycloak:
     platform: linux/amd64
     image: orthancteam/orthanc-keycloak:23.11.0
