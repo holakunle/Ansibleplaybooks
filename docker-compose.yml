@@ -2,8 +2,7 @@ version: "3"
 services:
 
   nginx:
-    platform: linux/amd64
-    image: orthancteam/orthanc-nginx:23.11.0
+    image: orthancteam/orthanc-nginx:23.11.2
     depends_on: [orthanc, orthanc-auth-service]
     restart: unless-stopped
     ports: ["8080:80"]
@@ -11,202 +10,88 @@ services:
       ENABLE_ORTHANC: "true"
       ENABLE_KEYCLOAK: "true"
       ENABLE_OHIF: "true"
-      ENABLE_ORTHANC_TOKEN_SERVICE: "true"
+      ENABLE_MEDDREAM: "true"
 
   orthanc:
-    platform: linux/amd64
-    image: osimis/orthanc:23.11.0
-    volumes:
-      - /data:/var/lib/orthanc/db
+    image: osimis/orthanc:mainline-2023.10.17
     restart: unless-stopped
     environment:
+      ORTHANC__NAME: "Orthanc CON 2023"
+      ORTHANC__AUTHENTICATION_ENABLED: "false"
+      ORTHANC__AUTHORIZATION__WEB_SERVICE_ROOT_URL: "http://orthanc-auth-service:8000/"
+      ORTHANC__AUTHORIZATION__WEB_SERVICE_USER_NAME: "share-user"
+      ORTHANC__AUTHORIZATION__STANDARD_CONFIGURATIONS: '["stone-webviewer","orthanc-explorer-2"]'
+      ORTHANC__AUTHORIZATION__CHECKED_LEVEL: "studies"
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
-      DICOM_WEB_PLUGIN_ENABLED: "true"
-      VOLVIEW_PLUGIN_ENABLED: "true"
-      OSIMIS_WEB_VIEWER_PLUGIN_ENABLED: "true"
-      ORTHANC__POSTGRESQL__HOST: "orthanc-db"
+      ORTHANC__DICOM_WEB__PUBLIC_ROOT: "/orthanc/dicom-web/"
       ORTHANC__POSTGRESQL__ENABLE_INDEX: "true"
+      ORTHANC__POSTGRESQL__HOST: "orthanc-db"
       ORTHANC__POSTGRESQL__INDEX_CONNECTIONS_COUNT: 10
       ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__STUDY_LIST_SEARCH_MODE: "search-button"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_SHARES: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_OHIF_VIEWER_3: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_MED_DREAM_VIEWER: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__MED_DREAM_VIEWER_PUBLIC_ROOT: "https://techxploit.com.ng/meddream/"
+      ORTHANC__ORTHANC_EXPLORER_2__TOKENS__INSTANT_LINKS_VALIDITY: 3600
+      ORTHANC__ORTHANC_EXPLORER_2__TOKENS__SHARE_TYPE: "stone-viewer-publication"
+      ORTHANC__ORTHANC_EXPLORER_2__IS_DEFAULT_ORTHANC_UI: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__ENABLE: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__URL: "https://techxploit.com.ng/keycloak/"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__REALM: "orthanc"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__CLIENT_ID: "orthanc"
+    volumes:
+      - /data:/var/lib/orthanc/db
+    secrets:
+      - ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD
+  
+  orthanc-for-api:
+    image: osimis/orthanc:mainline-2023.10.17
+    volumes:
+      - /data:/var/lib/orthanc/db
+      - ./meddream/meddream-plugin.py:/scripts/meddream-plugin.py
+    restart: unless-stopped
+    environment:
+      ORTHANC__NAME: "Orthanc for API"
+      ORTHANC__POSTGRESQL__HOST: "orthanc-db"
       VERBOSE_ENABLED: "true"
       VERBOSE_STARTUP: "true"
+      ORTHANC__AUTHENTICATION_ENABLED: "true"
+      ORTHANC__PYTHON_SCRIPT: "/scripts/meddream-plugin.py"
+      ORTHANC__DICOM_WEB__PUBLIC_ROOT: "/orthanc-api/dicom-web/"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_MED_DREAM_VIEWER: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__MED_DREAM_VIEWER_PUBLIC_ROOT: "https://techxploit.com.ng/meddream/"
       ORTHANC_JSON: |
         {
-          "Name": "FMC MAIN SERVER 1",
-          "StorageCompression" : true,
-          "MaximumStorageSize" : 0,
-          "ConcurrentJobs" : 10,
-          "JobsEngineThreadsCount" : {
-            "ResourceModification": 1
-          },
-          "MaximumPatientCount" : 0,
-          "MaximumStorageCacheSize" : 128,
-          "MaximumStorageMode" : "Recycle",
-          "LuaHeartBeatPeriod" : 0,
-          "LuaScripts" : [
-          ],
-          "WebDavDeleteAllowed" : false,
-          "WebDavUploadAllowed" : true,
-          "DicomServerEnabled" : true,
-          "DicomAet" : "FMCAM1",
-          "DicomCheckCalledAet" : true,
-          "DicomPort" : 4242,
-          "DefaultEncoding" : "Latin1",
-          "AcceptedTransferSyntaxes" : [ "1.2.840.10008.1.*" ],
-          "UnknownSopClassAccepted" : false,
-          "DicomScpTimeout" : 30,
-          "DicomTlsEnabled" : false,
-          "DicomTlsRemoteCertificateRequired" : true,
-          "DicomAlwaysAllowEcho" : true,
-          "DicomAlwaysAllowStore" : true,
-          "DicomAlwaysAllowFind" : true,
-          "DicomAlwaysAllowFindWorklist" : true,
-          "DicomAlwaysAllowGet" : true,
-          "DicomAlwaysAllowMove" : true,
-          "DicomCheckModalityHost" : false,
-          "DicomModalities" : {
-               "MICRODICOM" : [ "MICRODICOM", "192.168.43.153", 11112],
-               "RADIANT" : [ "RADIANT", "192.168.43.153", 11113]
-          },
-          "DicomModalitiesInDatabase" : false,
-          "DicomEchoChecksFind" : false,
-          "DicomScuTimeout" : 10,
-          "DicomScuPreferredTransferSyntax" : "1.2.840.10008.1.2.1",
-          "DicomThreadsCount" : 4,
-          "OrthancPeers" : {
-               "CLINICIANS_SERVER"  : [ "http://192.168.77.144:8043/", "orthanc", "orthanc" ]
-          },
-          "OrthancPeersInDatabase" : false,
-          "UserMetadata" : {
-            // "Sample" : 1024
-          },
-          "UserContentType" : {
-            // "sample" : 1024
-            // "sample2" : [ 1025, "application/pdf" ]
-          },
-          "StableAge" : 60,
-          "StrictAetComparison" : false,
-          "StoreMD5ForAttachments" : true,
-          "LimitFindResults" : 0,
-          "LimitFindInstances" : 0,
-          "LogExportedResources" : false,
-          "KeepAlive" : true,
-          "TcpNoDelay" : true,
-          "HttpThreadsCount" : 50,
-          "StoreDicom" : true,
-          "DicomAssociationCloseDelay" : 5,
-          "QueryRetrieveSize" : 100,
-          "CaseSensitivePN" : false,
-          "LoadPrivateDictionary" : true,
-          "Dictionary" : {
-          },
-          "SynchronousCMove" : true,
-          "JobsHistorySize" : 10,
-          "SaveJobs" : true,
-          "OverwriteInstances" : false,
-          "MediaArchiveSize" : 1,
-          "StorageAccessOnFind" : "Always",
-          "MetricsEnabled" : true,
-          "ExecuteLuaEnabled" : false,
-          "HttpRequestTimeout" : 30,
-          "DefaultPrivateCreator" : "",
-          "StorageCommitmentReportsSize" : 100,
-          "TranscodeDicomProtocol" : true,
-          "BuiltinDecoderTranscoderOrder" : "After",
-          "IngestTranscoding" : "1.2.840.10008.1.2.4.70",
-          "IngestTranscodingOfUncompressed" : true,
-          "IngestTranscodingOfCompressed" : true,
-          "DicomLossyTranscodingQuality" : 90,
-          "SyncStorageArea" : true,
-          "MallocArenaMax" : 5,
-          "DeidentifyLogs" : true,
-          "DeidentifyLogsDicomVersion" : "2021b",
-          "MaximumPduLength" : 16384,
-          "CheckRevisions" : false,
-          "SynchronousZipStream" : true,
-          "ZipLoaderThreads": 0,
-          "Warnings" : {
-            "W001_TagsBeingReadFromStorage": true,
-            "W002_InconsistentDicomTagsInDb": true
-          },
-          "Transfers" : {
-            "Threads" : 5,
-            "BucketSize" : 20480,
-            "CacheSize" : 128,
-            "MaxPushTransactions" : 5,
-            "MaxHttpRetries" : 0
-          },
-          "Tcia" : {
-            "Enable" : true
-          },
-
-          "OrthancExplorer2": {
-            "IsDefaultUI": true,
-            "UiOptions": {
-              "EnableShares": true,
-              "DefaultShareDuration": 0,
-              "ShareDurations": [0, 7, 15, 30, 90, 365],
-              "EnableOpenInOhifViewer3": true,
-              "OhifViewer3PublicRoot": "https://techxploit.com.ng/ohif/"
-            },
-            "Tokens" : {
-              "InstantLinksValidity": 3600,
-              "ShareType": "ohif-viewer-publication"
-            },
-            "Keycloak" : {
-              "Enable": true,
-              "Url": "https://techxploit.com.ng/keycloak/",
-              "Realm": "orthanc",
-              "ClientId": "orthanc"
-            }
-          },
-          "AuthenticationEnabled": false,     // because it is handled by the authorization plugin
-          "Authorization": {
-            "WebServiceRootUrl": "http://orthanc-auth-service:8000/",
-            "WebServiceUsername": "share-user",
-            "WebServicePassword": "change-me",
-            "StandardConfigurations" : [
-              "osimis-web-viewer",
-              "stone-webviewer",
-              "orthanc-explorer-2"
-            ],
-            "CheckedLevel": "studies"
-          },
-          "DicomWeb": {
-            "Enable": true,
-            "Root" : "/dicom-web/",
-            "EnableWado" : true,
-            "WadoRoot" : "/wado",
-            "Host" : "localhost",
-            "StudiesMetadata" : "Full",
-            "SeriesMetadata" : "Full",
-            "PublicRoot": "/orthanc/dicom-web/"
+          "RegisteredUsers": {
+            "meddream-user": "change-me",
+            "script-user": "change-me",
+            "dicom-web-client-user": "change-me"
           }
-
         }
+ 
+ 
   orthanc-auth-service:
-    platform: linux/amd64
-    image: orthancteam/orthanc-auth-service:23.9.0
+    image: orthancteam/orthanc-auth-service:23.11.2
     depends_on: [keycloak]
     restart: unless-stopped
     environment:
       ENABLE_KEYCLOAK: "true"
       PUBLIC_ORTHANC_ROOT: "https://techxploit.com.ng/orthanc/"
       PUBLIC_LANDING_ROOT: "https://techxploit.com.ng/orthanc/ui/app/token-landing.html"
+      MEDDREAM_TOKEN_SERVICE_URL: "http://meddream-token-service:8088/v3/generate"
+      PUBLIC_MEDDREAM_ROOT: "https://techxploit.com.ng/meddream/"
       PERMISSIONS_FILE_PATH: "/orthanc_auth_service/permissions.json"
-      PUBLIC_OHIF_ROOT: "https://techxploit.com.ng/ohif/"
       USERS: |
         {
           "share-user": "change-me"
         }
     secrets:
-      - SECRET_KEY
+      - SECRET_KEY   
     volumes:
       - ./permissions.json:/orthanc_auth_service/permissions.json
-      
+
   keycloak:
-    platform: linux/amd64
-    image: orthancteam/orthanc-keycloak:23.11.0
+    image: orthancteam/orthanc-keycloak:23.11.2
     depends_on: [keycloak-db]
     restart: unless-stopped
     environment:
@@ -219,14 +104,6 @@ services:
       KC_HOSTNAME_ADMIN_URL: "https://techxploit.com.ng/keycloak"
     env_file:
       - ./secrets/KEYCLOAK_ADMIN_PASSWORD.env
-
-  ohif:
-    platform: linux/amd64
-    image: orthancteam/ohif-v3:23.11.0
-#  uncomment if you want to customize ohif configuration
-#    volumes:
-#      - ./ohif-app-config.js:/usr/share/nginx/html/app-config.js
-    restart: unless-stopped
 
   keycloak-db:
     image: postgres:15
@@ -243,12 +120,39 @@ services:
     volumes: ["orthanc-db:/var/lib/postgresql/data:Z"] 
     environment:
       POSTGRES_HOST_AUTH_METHOD: "trust"
+  
+  ohif:
+    image: orthancteam/ohif-v3:23.11.2
+    restart: unless-stopped
+
+  meddream-token-service:
+    image: orthancteam/meddream-token-service:23.11.2
+    restart: unless-stopped
+
+  meddream-viewer:
+    image: orthancteam/meddream-viewer:23.11.2
+    restart: unless-stopped
+    depends_on:
+      - orthanc-for-api
+    environment:
+      integration: "study"
+      TOKEN_SERVICE_ADDRESS: "http://meddream-token-service:8088/v3/validate"
+      ORTHANC_BASE_URL: "http://orthanc-for-api:8042"
+      ORTHANC_USER: "meddream"
+      ORTHANC_MEDDREAM_PYTHON_PLUGIN_ENABLED: "true"
+      MEDDREAM_ADMIN_PASSWORD: "change-me"
+    volumes:
+      - meddream-license:/opt/meddream/license
+      - meddream-settings:/opt/meddream/sys/settings
 
 volumes:
   orthanc-db:
   keycloak-db:
+  meddream-license:
+  meddream-settings:
 
 secrets:
   SECRET_KEY:
     file: secrets/SECRET_KEY
-
+  ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD:
+    file: secrets/ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD
