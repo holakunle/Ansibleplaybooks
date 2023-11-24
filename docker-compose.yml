@@ -10,7 +10,7 @@ services:
     environment:
       ENABLE_ORTHANC: "true"
       ENABLE_KEYCLOAK: "true"
-      ENABLE_OHIF: "false"
+      ENABLE_OHIF: "true"
       ENABLE_ORTHANC_TOKEN_SERVICE: "true"
 
   orthanc:
@@ -23,7 +23,6 @@ services:
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
       DICOM_WEB_PLUGIN_ENABLED: "true"
       VOLVIEW_PLUGIN_ENABLED: "true"
-      OHIF_PLUGIN_ENABLED: "true"
       OSIMIS_WEB_VIEWER_PLUGIN_ENABLED: "true"
       ORTHANC__POSTGRESQL__HOST: "orthanc-db"
       ORTHANC__POSTGRESQL__ENABLE_INDEX: "true"
@@ -179,16 +178,11 @@ services:
             "EnableWado" : true,
             "WadoRoot" : "/wado",
             "Host" : "localhost",
-            "Ssl" : true,
             "StudiesMetadata" : "Full",
             "SeriesMetadata" : "Full",
             "PublicRoot": "/orthanc/dicom-web/"
           }
 
-          "OHIF": {
-            "DataSource": "dicom-web",
-            "preload": true
-            }
         }
   orthanc-auth-service:
     platform: linux/amd64
