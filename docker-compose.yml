@@ -10,28 +10,27 @@ services:
       ENABLE_ORTHANC: "true"
       ENABLE_KEYCLOAK: "true"
       ENABLE_OHIF: "true"
-      ENABLE_MEDDREAM: "true"
 
   orthanc:
     image: osimis/orthanc:mainline-2023.10.17
     restart: unless-stopped
     environment:
-      ORTHANC__NAME: "Orthanc CON 2023"
+      ORTHANC__NAME: "FMCA MAIN SERVER 3"
       ORTHANC__AUTHENTICATION_ENABLED: "false"
       ORTHANC__AUTHORIZATION__WEB_SERVICE_ROOT_URL: "http://orthanc-auth-service:8000/"
       ORTHANC__AUTHORIZATION__WEB_SERVICE_USER_NAME: "share-user"
-      ORTHANC__AUTHORIZATION__STANDARD_CONFIGURATIONS: '["stone-webviewer","orthanc-explorer-2"]'
+      ORTHANC__AUTHORIZATION__STANDARD_CONFIGURATIONS: '["stone-webviewer", "osimis-web-viewer", "orthanc-explorer-2"]'
       ORTHANC__AUTHORIZATION__CHECKED_LEVEL: "studies"
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
+      ORTHANC__DICOM_WEB__ENABLE: "true"
       ORTHANC__DICOM_WEB__PUBLIC_ROOT: "/orthanc/dicom-web/"
       ORTHANC__POSTGRESQL__ENABLE_INDEX: "true"
       ORTHANC__POSTGRESQL__HOST: "orthanc-db"
       ORTHANC__POSTGRESQL__INDEX_CONNECTIONS_COUNT: 10
       ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__STUDY_LIST_SEARCH_MODE: "search-button"
-      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_SHARES: "true"
       ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_OHIF_VIEWER_3: "true"
-      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_MED_DREAM_VIEWER: "true"
-      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__MED_DREAM_VIEWER_PUBLIC_ROOT: "https://techxploit.com.ng/meddream/"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__OHIF_VIEWER_3_PUBLIC_ROOT: "https://techxploit.com.ng/ohif/"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_SHARES: "true"
       ORTHANC__ORTHANC_EXPLORER_2__TOKENS__INSTANT_LINKS_VALIDITY: 3600
       ORTHANC__ORTHANC_EXPLORER_2__TOKENS__SHARE_TYPE: "stone-viewer-publication"
       ORTHANC__ORTHANC_EXPLORER_2__IS_DEFAULT_ORTHANC_UI: "true"
@@ -41,35 +40,7 @@ services:
       ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__CLIENT_ID: "orthanc"
     volumes:
       - /data:/var/lib/orthanc/db
-    secrets:
-      - ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD
-  
-  orthanc-for-api:
-    image: osimis/orthanc:mainline-2023.10.17
-    volumes:
-      - /data:/var/lib/orthanc/db
-      - ./meddream/meddream-plugin.py:/scripts/meddream-plugin.py
-    restart: unless-stopped
-    environment:
-      ORTHANC__NAME: "Orthanc for API"
-      ORTHANC__POSTGRESQL__HOST: "orthanc-db"
-      VERBOSE_ENABLED: "true"
-      VERBOSE_STARTUP: "true"
-      ORTHANC__AUTHENTICATION_ENABLED: "true"
-      ORTHANC__PYTHON_SCRIPT: "/scripts/meddream-plugin.py"
-      ORTHANC__DICOM_WEB__PUBLIC_ROOT: "/orthanc-api/dicom-web/"
-      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_MED_DREAM_VIEWER: "true"
-      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__MED_DREAM_VIEWER_PUBLIC_ROOT: "https://techxploit.com.ng/meddream/"
-      ORTHANC_JSON: |
-        {
-          "RegisteredUsers": {
-            "meddream-user": "change-me",
-            "script-user": "change-me",
-            "dicom-web-client-user": "change-me"
-          }
-        }
- 
- 
+
   orthanc-auth-service:
     image: orthancteam/orthanc-auth-service:23.11.2
     depends_on: [keycloak]
@@ -78,17 +49,16 @@ services:
       ENABLE_KEYCLOAK: "true"
       PUBLIC_ORTHANC_ROOT: "https://techxploit.com.ng/orthanc/"
       PUBLIC_LANDING_ROOT: "https://techxploit.com.ng/orthanc/ui/app/token-landing.html"
-      MEDDREAM_TOKEN_SERVICE_URL: "http://meddream-token-service:8088/v3/generate"
-      PUBLIC_MEDDREAM_ROOT: "https://techxploit.com.ng/meddream/"
       PERMISSIONS_FILE_PATH: "/orthanc_auth_service/permissions.json"
-      USERS: |
-        {
-          "share-user": "change-me"
-        }
     secrets:
-      - SECRET_KEY   
+      - SECRET_KEY
     volumes:
       - ./permissions.json:/orthanc_auth_service/permissions.json
+
+
+  ohif:
+    image: orthancteam/ohif-v3:23.11.2
+    restart: unless-stopped
 
   keycloak:
     image: orthancteam/orthanc-keycloak:23.11.2
@@ -120,39 +90,11 @@ services:
     volumes: ["orthanc-db:/var/lib/postgresql/data:Z"] 
     environment:
       POSTGRES_HOST_AUTH_METHOD: "trust"
-  
-  ohif:
-    image: orthancteam/ohif-v3:23.11.2
-    restart: unless-stopped
-
-  meddream-token-service:
-    image: orthancteam/meddream-token-service:23.11.2
-    restart: unless-stopped
-
-  meddream-viewer:
-    image: orthancteam/meddream-viewer:23.11.2
-    restart: unless-stopped
-    depends_on:
-      - orthanc-for-api
-    environment:
-      integration: "study"
-      TOKEN_SERVICE_ADDRESS: "http://meddream-token-service:8088/v3/validate"
-      ORTHANC_BASE_URL: "http://orthanc-for-api:8042"
-      ORTHANC_USER: "meddream"
-      ORTHANC_MEDDREAM_PYTHON_PLUGIN_ENABLED: "true"
-      MEDDREAM_ADMIN_PASSWORD: "change-me"
-    volumes:
-      - meddream-license:/opt/meddream/license
-      - meddream-settings:/opt/meddream/sys/settings
 
 volumes:
   orthanc-db:
   keycloak-db:
-  meddream-license:
-  meddream-settings:
 
 secrets:
   SECRET_KEY:
     file: secrets/SECRET_KEY
-  ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD:
-    file: secrets/ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD
