@@ -12,6 +12,7 @@ services:
       ENABLE_KEYCLOAK: "true"
       ENABLE_OHIF: "true"
       ENABLE_MEDDREAM: "true"
+      ENABLE_ORTHANC_FOR_API: "true"
 
   orthanc:
     platform: linux/amd64
