@@ -2,6 +2,7 @@ version: "3"
 services:
 
   nginx:
+    platform: linux/amd64
     image: orthancteam/orthanc-nginx:23.12.0
     depends_on: [orthanc, orthanc-auth-service]
     restart: unless-stopped
@@ -14,82 +15,68 @@ services:
       ENABLE_ORTHANC_FOR_API: "true"
 
   orthanc:
+    platform: linux/amd64
     image: osimis/orthanc:master-full
     restart: unless-stopped
     environment:
+      ORTHANC__NAME: "FMCA MAIN SERVER 3"
+      ORTHANC__AUTHENTICATION_ENABLED: "false"
+      ORTHANC__AUTHORIZATION__WEB_SERVICE_ROOT_URL: "http://orthanc-auth-service:8000/"
+      ORTHANC__AUTHORIZATION__WEB_SERVICE_USER_NAME: "share-user"
+      ORTHANC__AUTHORIZATION__STANDARD_CONFIGURATIONS: '["stone-webviewer", "osimis-web-viewer", "orthanc-explorer-2"]'
+      ORTHANC__AUTHORIZATION__CHECKED_LEVEL: "studies"
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
       DICOM_WEB_PLUGIN_ENABLED: "true"
+      DICOM_WEB_ENABLED: "true"
       ORTHANC__POSTGRESQL__ENABLE_INDEX: "true"
       ORTHANC__POSTGRESQL__HOST: "orthanc-db"
       ORTHANC__POSTGRESQL__INDEX_CONNECTIONS_COUNT: 10
       VERBOSE_ENABLED: "true"
       VERBOSE_STARTUP: "true"
-      ORTHANC_JSON: |
-        {
-          "Name": "FMCA PACS SYSTEM",
-          "OrthancExplorer2": {
-            "IsDefaultUI": true,
-            "UiOptions": {
-              "EnableShares": true,
-              "DefaultShareDuration": 0,
-              "ShareDurations": [0, 7, 15, 30, 90, 365],
-              "EnableOpenInOhifViewer3": true,
-              "EnableOpenInMedDreamViewer": true,
-              "OhifViewer3PublicRoot": "https://techxploit.com.ng/ohif/"
-              "MeddreamViewerPublicRoot": https://techxploit.com.ng/meddream/"
-            },
-            "Tokens" : {
-              "InstantLinksValidity": 3600,
-              "ShareType": "ohif-viewer-publication"
-            },
-            "Keycloak" : {
-              "Enable": true,
-              "Url": "https://techxploit.com.ng/keycloak/",
-              "Realm": "orthanc",
-              "ClientId": "orthanc"
-            }
-          },
-          "AuthenticationEnabled": false,     // because it is handled by the authorization plugin
-          "Authorization": {
-            "WebServiceRootUrl": "http://orthanc-auth-service:8000/",
-            "WebServiceUsername": "share-user",
-            "WebServicePassword": "change-me",
-            "StandardConfigurations" : [
-              "osimis-web-viewer",
-              "stone-webviewer",
-              "orthanc-explorer-2"
-            ],
-            "CheckedLevel": "studies"
-          },
-          "DicomWeb": {
-            "Enable": true,
-            "PublicRoot": "/orthanc/dicom-web/"
-          }
-        }
+      ORTHANC__DICOM_WEB__ENABLE: "true"
+      ORTHANC__DICOM_WEB__PUBLIC_ROOT: "/orthanc/dicom-web/"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__STUDY_LIST_SEARCH_MODE: "search-button"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_OHIF_VIEWER_3: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__OHIF_VIEWER_3_PUBLIC_ROOT: "https://techxploit.com.ng/ohif/"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_OPEN_IN_MED_DREAM_VIEWER: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__MED_DREAM_VIEWER_PUBLIC_ROOT: "https://techxploit.com.ng/meddream/"
+      ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_SHARES: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__TOKENS__INSTANT_LINKS_VALIDITY: 3600
+      ORTHANC__ORTHANC_EXPLORER_2__TOKENS__SHARE_TYPE: "stone-viewer-publication"
+      ORTHANC__ORTHANC_EXPLORER_2__IS_DEFAULT_ORTHANC_UI: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__ENABLE: "true"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__URL: "https://techxploit.com.ng/keycloak/"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__REALM: "orthanc"
+      ORTHANC__ORTHANC_EXPLORER_2__KEYCLOAK__CLIENT_ID: "orthanc"
       
     volumes:
       - /data:/var/lib/orthanc/db
+    secrets:
+      - ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD
 
   orthanc-auth-service:
+    platform: linux/amd64
     image: orthancteam/orthanc-auth-service:23.12.0
     depends_on: [keycloak]
-    volumes:
-      - ./permissions.jsonc:/orthanc_auth_service/permissions.json
     restart: unless-stopped
     environment:
-      SECRET_KEY: "change-me-I-am-a-secret-key"
       ENABLE_KEYCLOAK: "true"
       PUBLIC_ORTHANC_ROOT: "https://techxploit.com.ng/orthanc/"
       PUBLIC_LANDING_ROOT: "https://techxploit.com.ng/orthanc/ui/app/token-landing.html"
+      MEDDREAM_TOKEN_SERVICE_URL: "http://meddream-token-service:8088/v3/generate"
+      PUBLIC_MEDDREAM_ROOT: "https://techxploit.com.ng/meddream/"
+      PERMISSIONS_FILE_PATH: "/orthanc_auth_service/permissions.json"
       USERS: |
         {
           "share-user": "change-me"
         }
-      MEDDREAM_TOKEN_SERVICE_URL: "http://meddream-token-service:8088/v3/generate"
-      PUBLIC_MEDDREAM_ROOT: "https://techxploit.com.ng/meddream/"
-      PERMISSIONS_FILE_PATH: "/orthanc_auth_service/permissions.json"
+    secrets:
+      - SECRET_KEY
+    volumes:
+      - ./permissions.json:/orthanc_auth_service/permissions.json
 
   orthanc-for-api:
+    platform: linux/amd64
     image: osimis/orthanc:master-full
     volumes:
       - /data:/var/lib/orthanc/db
@@ -117,6 +104,7 @@ services:
         }
 
   keycloak:
+    platform: linux/amd64
     image: orthancteam/orthanc-keycloak:23.12.0
     depends_on: [keycloak-db]
     restart: unless-stopped
@@ -132,6 +120,7 @@ services:
       - ./secrets/KEYCLOAK_ADMIN_PASSWORD.env
   
   keycloak-db:
+    platform: linux/amd64
     image: postgres:15
     restart: unless-stopped
     volumes: ["keycloak-db:/var/lib/postgresql/data"]
@@ -141,6 +130,7 @@ services:
       POSTGRES_DB: "keycloak"
 
   orthanc-db:
+    platform: linux/amd64
     image: postgres:15
     restart: unless-stopped
     volumes: ["orthanc-db:/var/lib/postgresql/data:Z"] 
@@ -148,6 +138,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "trust"
   
   ohif:
+    platform: linux/amd64
     image: orthancteam/ohif-v3:23.12.0
     restart: unless-stopped
 
@@ -156,6 +147,7 @@ services:
     restart: unless-stopped
 
   meddream-viewer:
+    platform: linux/amd64
     image: orthancteam/meddream-viewer:23.12.0
     restart: unless-stopped
     depends_on:
@@ -179,6 +171,9 @@ volumes:
   meddream-settings:
 
 secrets:
+  
   SECRET_KEY:
     file: secrets/SECRET_KEY
+  ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD:
+    file: secrets/ORTHANC__AUTHORIZATION__WEB_SERVICE_PASSWORD
  
