@@ -16,33 +16,34 @@ services:
 
   orthanc:
     platform: linux/amd64
-    image: osimis/orthanc:mainline-2023.10.17
+    image: osimis/orthanc:master-full
+    volumes:
+      - /data:/var/lib/orthanc/db
     restart: unless-stopped
     environment:
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
       DICOM_WEB_PLUGIN_ENABLED: "true"
-      ORTHANC__POSTGRESQL__ENABLE_INDEX: "true"
       ORTHANC__POSTGRESQL__HOST: "orthanc-db"
+      ORTHANC__POSTGRESQL__ENABLE_INDEX: "true"
       ORTHANC__POSTGRESQL__INDEX_CONNECTIONS_COUNT: 10
       ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__STUDY_LIST_SEARCH_MODE: "search-button"
       VERBOSE_ENABLED: "true"
       VERBOSE_STARTUP: "true"
       ORTHANC_JSON: |
         {
-          "Name": "Orthanc",
+          "Name": "FMCA SERVER",
           "OrthancExplorer2": {
             "IsDefaultUI": true,
             "UiOptions": {
-              "EnableOpenInOhifViewer3": true,
-              "OhifViewer3PublicRoot": "https://techxploit.com.ng/ohif/"
-          
               "EnableShares": true,
               "DefaultShareDuration": 0,
-              "ShareDurations": [0, 7, 15, 30, 90, 365]
+              "ShareDurations": [0, 7, 15, 30, 90, 365],
+              "EnableOpenInOhifViewer3": true,
+              "OhifViewer3PublicRoot": "https://techxploit.com.ng/ohif/"
             },
             "Tokens" : {
               "InstantLinksValidity": 3600,
-              "ShareType": "meddream-viewer-publication"
+              "ShareType": "ohif-viewer-publication"
             },
             "Keycloak" : {
               "Enable": true,
@@ -66,13 +67,9 @@ services:
           "DicomWeb": {
             "Enable": true,
             "PublicRoot": "/orthanc/dicom-web/"
-          }
+           }
         }
-      
-    volumes:
-      - /data:/var/lib/orthanc/db
-     
-    
+                
   orthanc-auth-service:
     platform: linux/amd64
     image: orthancteam/orthanc-auth-service:23.11.2
