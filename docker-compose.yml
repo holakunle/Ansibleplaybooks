@@ -8,6 +8,7 @@ version: "3"
 services:
 
   nginx:
+    platform: linux/amd64
     image: orthancteam/orthanc-nginx:23.12.2
     depends_on: [orthanc, orthanc-auth-service, orthanc-for-api, meddream-viewer, keycloak]
     restart: unless-stopped
@@ -27,6 +28,7 @@ services:
       ENABLE_ORTHANC_FOR_API: "true"
 
   orthanc:
+    platform: linux/amd64
     image: osimis/orthanc:master-full
     volumes:
       - orthanc-storage:/var/lib/orthanc/db
@@ -196,6 +198,7 @@ services:
         
 
   orthanc-auth-service:
+    platform: linux/amd64
     image: orthancteam/orthanc-auth-service:23.12.2
     depends_on: [keycloak, meddream-token-service]
     # permissions can be customized in the permissions.json file
@@ -223,6 +226,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "trust"
 
   keycloak:
+    platform: linux/amd64
     image: orthancteam/orthanc-keycloak:23.12.2
     depends_on: [keycloak-db]
     restart: unless-stopped
@@ -246,10 +250,12 @@ services:
       POSTGRES_DB: "keycloak"
 
   meddream-token-service:
+    platform: linux/amd64
     image: orthancteam/meddream-token-service:23.12.2
     restart: unless-stopped
     
   ohif:
+    platform: linux/amd64
     image: orthancteam/ohif-v3:23.12.2
 #  uncomment if you want to customize ohif configuration
 #    volumes:
@@ -257,6 +263,7 @@ services:
     restart: unless-stopped
 
   meddream-viewer:
+    platform: linux/amd64
     image: orthancteam/meddream-viewer:23.12.2
     restart: unless-stopped
     depends_on:
@@ -274,6 +281,7 @@ services:
 
   # An orthanc dedicated for API accesses and also used by MedDream
   orthanc-for-api:
+    platform: linux/amd64
     image: osimis/orthanc:master-full
     volumes:
       - orthanc-storage:/var/lib/orthanc/db
