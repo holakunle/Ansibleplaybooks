@@ -6,9 +6,12 @@ metadata:
     name: redis-pod
     app: redis
 spec:
+  type: NodePort
   selector:
     name: redis-pod
     app: redis
   ports:
-  - port: 6334
-    targetPort: 6379
+    - port: 6334
+      targetPort: 6379
+      nodePort: 30003
+  
