@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Redis-deployment-pod
+  labels:
+    name: Redis
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: redis-pod
+      app: redis
+  template:
+    metadata:
+      labels:
+        name: redis-pod
+        app: redis
+    spec:
+      containers:
+      - name: redisapp
+        image: redis:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6334
