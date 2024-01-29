@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxapp-pod
+  labels:
+    name: nginxapp-pod
+    app: web-server
+    
+spec:
+  containers:
+  - name: nginxapp
+    image: Nginx
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+
