@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-orthanc-deployment
+  labels:
+    name: nginx-orthanc-deployment
+    app: orthanc
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      name: nginx-orthanc-deployment
+      app: orthanc
+  template:
+    metadata:
+      labels:
+        name: nginx-orthanc-deployment
+        app: orthanc
+    spec:
+      containers:
+      - name: nginxapp
+        image: orthancteam/orthanc-nginx:24.1.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80
+        env:
+          - name: ENABLE_ORTHANC
+            value: "true"
+          - name: ENABLE_KEYCLOAK
+            value: "true"
+          - name: ENABLE_MEDDREAM
+            value: "true"
+          - name: ENABLE_ORTHANC_FOR_API
+            value: "true"
+          - name: ENABLE_ORTHANC_TOKEN_SERVICE
+            value: "true"
+          - name: ENABLE_OHIF
+            value: "true"
+
+
