@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-orthanc-deployment
+  labels:
+    name: keycloak-orthanc-deployment
+    app: orthanc
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      name: keycloak-orthanc-deployment
+      app: orthanc
+  template:
+    metadata:
+      labels:
+        name: keycloak-orthanc-deployment
+        app: orthanc
+    spec:
+      containers:
+      - name: keycloak
+        image: orthancteam/orthanc-keycloak:24.1.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 8080
+        env:
+
+          - name: KEYCLOAK_ADMIN
+            value: "admin"
+          - name: KEYCLOAK_ADMIN_PASSWORD
+            value: "change-me"
+          - name: KC_DB
+            value: "postgres"
+          - name: KC_DB_URL
+            value: "jdbc:postgresql://keycloak-db:5432/keycloak"
+          - name: KC_DB_USERNAME
+            value: "keycloak"
+          - name: KC_DB_PASSWORD
+            value: "keycloak"
+          - name: KC_HOSTNAME_URL
+            value: "http://localhost/keycloak"
+          - name: KC_HOSTNAME_ADMIN_URL
+            value: "http://localhost/keycloak"
