@@ -7,6 +7,11 @@ metadata:
     app: web-server
 spec:
   type: NodePort
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     name: nginxapp-pod
     app: web-server
