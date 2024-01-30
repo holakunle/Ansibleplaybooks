@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-orthanc-service
+  labels:
+    name: nginx-orthanc-deployment
+    app: orthanc
+spec:
+  type: NodePort
+  selector:
+    name: nginx-orthanc-deployment
+    app: orthanc
+  ports:
+  - port: 80
+    targetPort: 80
+    NodePort: 30002
