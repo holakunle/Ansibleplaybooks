@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-orthanc-db-deployment
+  labels:
+    name: keycloak-orthanc-deployment
+    app: orthanc
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: keycloak-orthanc-deployment
+      app: orthanc
+  template:
+    metadata:
+      labels:
+        name: keycloak-orthanc-deployment
+        app: orthanc
+    spec:
+      containers:
+      - name: keycloak-db
+        image: postgres:15
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: keycloak-db
+        env:
+          - name: POSTGRES_PASSWORD
+            value: "keycloak"
+          - name: POSTGRES_USER
+            value: "keycloak"
+          - name:  POSTGRES_DB
+            value: "keycloak"
+      volumes: 
+        - name: keycloak-db
+          persistentVolumeClaim:
+            claimName: keycloak-db
+          
+
+
