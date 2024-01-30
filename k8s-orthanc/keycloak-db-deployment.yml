@@ -29,7 +29,7 @@ spec:
         - containerPort: 5432
         volumeMounts:
           - mountPath: /var/lib/postgresql/data
-            name: keycloak-db
+            name: keycloak-pv
         env:
           - name: POSTGRES_PASSWORD
             value: "keycloak"
@@ -38,9 +38,9 @@ spec:
           - name:  POSTGRES_DB
             value: "keycloak"
       volumes: 
-        - name: keycloak-db
+        - name: keycloak-pv
           persistentVolumeClaim:
-            claimName: keycloak-db
+            claimName: keycloak-db-pvc
           
 
 
