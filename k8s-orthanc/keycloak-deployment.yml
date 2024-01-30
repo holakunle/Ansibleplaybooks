@@ -6,7 +6,7 @@ metadata:
     name: keycloak-orthanc-deployment
     app: orthanc
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
