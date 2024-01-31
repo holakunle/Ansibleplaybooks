@@ -1,0 +1,257 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orthanc-deployment-pod
+  labels:
+    name: orthanc-pod
+    app: orthanc
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      name: orthanc-pod
+      app: orthanc
+  template:
+    metadata:
+      name: orthanc-app-pod
+      labels:
+        name: orthanc-pod
+        app: orthanc
+    spec:
+      containers:
+      - name: orthanc
+        image: osimis/orthanc:24.1.2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8042
+        volumeMounts:
+            - mountPath: /var/lib/orthanc/db
+              name: keycloak-pv
+        env:
+          - name: DICOM_WEB_PLUGIN_ENABLED
+            value: "true"
+          - name: HOUSE_KEEPER_PLUGIN_ENABLED
+            value: "true"
+          - name: ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__ENABLE_SHARES
+            value: "true"
+          - name: ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__SHOW_SAME_PATIENT_STUDIES_FILTER
+            value: '["PatientBirthDate"]'
+          - name: ORTHANC__ORTHANC_EXPLORER_2__UI_OPTIONS__STUDY_LIST_SEARCH_MODE
+            value: search-button
+          - name: ORTHANC__POSTGRESQL__ENABLE_INDEX
+            value: "true"
+          - name: ORTHANC__POSTGRESQL__HOST
+            value: orthanc-db
+          - name: ORTHANC__POSTGRESQL__INDEX_CONNECTIONS_COUNT
+            value: "10"
+          - name: OSIMIS_WEB_VIEWER_PLUGIN_ENABLED
+            value: "false"
+          - name: STONE_WEB_VIEWER_PLUGIN_ENABLED
+            value: "true"
+          - name: TCIA_PLUGIN_ENABLED
+            value: "true"
+          - name: VERBOSE_ENABLED
+            value: "true"
+          - name: VERBOSE_STARTUP
+            value: "true"
+          - name: VOLVIEW_PLUGIN_ENABLED
+            value: "true"
+          - name: WSI_PLUGIN_ENABLED
+            value: "true"
+          - name: ORTHANC_JSON
+            value: |
+               {
+                  "Name": "Orthanc",
+                  "StorageCompression" : true,
+                  "MaximumStorageSize" : 0,
+                  "MaximumPatientCount" : 0,
+                  "MaximumStorageCacheSize" : 128,
+                  "MaximumStorageMode" : "Recycle",
+                  "HttpServerEnabled" : true,
+                  "HttpPort" : 8042,
+                  "LuaHeartBeatPeriod" : 0,
+                  "LuaScripts" : [
+                  ],
+                  "ConcurrentJobs" : 10,
+                  "JobsEngineThreadsCount" : {
+                    "ResourceModification": 1
+                  },
+                  "WebDavEnabled" : true,
+                  "WebDavDeleteAllowed" : false,
+                  "WebDavUploadAllowed" : true,
+                  "DicomServerEnabled" : true,
+                  "DicomAet" : "SERVERMAIN1",
+                  "DicomCheckCalledAet" : true,
+                  "DicomPort" : 4242,
+                  "DefaultEncoding" : "Latin1",
+                  "AcceptedTransferSyntaxes" : [ "1.2.840.10008.1.*" ],
+                  "UnknownSopClassAccepted" : false,
+                  "DicomScpTimeout" : 30,
+                  "SslEnabled" : false,
+                  "SslCertificate" : "certificate.pem",
+                  "SslMinimumProtocolVersion" : 4,
+                  "SslVerifyPeers" : false,
+                  "SslTrustedClientCertificates" : "trustedClientCertificates.pem",
+                  "DicomTlsEnabled" : false,
+                  "DicomTlsRemoteCertificateRequired" : true,
+                  "DicomAlwaysAllowEcho" : true,
+                  "DicomAlwaysAllowStore" : true,
+                  "DicomAlwaysAllowFind" : false,
+                  "DicomAlwaysAllowFindWorklist" : false,
+                  "DicomAlwaysAllowGet" : false,
+                  "DicomAlwaysAllowMove" : false,
+                  "DicomCheckModalityHost" : false,
+                  "DicomModalities" : {
+                    "microtest" : [ "MICRODICOM", "192.168.0.104", 11112],
+                    "radiantvv" : [ "RADIANT", "192.168.0.104", 11115]
+                  },
+                  "DicomModalitiesInDatabase" : false,
+                  "DicomEchoChecksFind" : false,
+                  "DicomScuTimeout" : 10,
+                  "DicomScuPreferredTransferSyntax" : "1.2.840.10008.1.2.1",
+                  "DicomThreadsCount" : 4,
+                  "OrthancPeers" : {
+                    "CLOUDSERVER" : [ "https://www.techxploit.com.ng/" ],
+                    "windows" : [ "http://172.26.18.246:8043/", "orthanc", "orthanc" ]
+                  },
+                  "OrthancPeersInDatabase" : false,
+                  "HttpProxy" : "",
+                  "HttpVerbose" : false,
+                  "HttpTimeout" : 60,
+                  "HttpsVerifyPeers" : true,
+                  "HttpsCACertificates" : "/etc/ssl/certs/ca-certificates.crt",
+                  "UserMetadata" : {
+                    // "Sample" : 1024
+                  },
+                  "UserContentType" : {
+                    // "sample" : 1024
+                    // "sample2" : [ 1025, "application/pdf" ]
+                  },
+                  "StableAge" : 60,
+                  "StrictAetComparison" : false,
+                  "StoreMD5ForAttachments" : true,
+                  "LimitFindResults" : 0,
+                  "LimitFindInstances" : 0,
+                  "LogExportedResources" : false,
+                  "KeepAlive" : true,
+                  "TcpNoDelay" : true,
+                  "HttpThreadsCount" : 50,
+                  "StoreDicom" : true,
+                  "DicomAssociationCloseDelay" : 5,
+                  "QueryRetrieveSize" : 100,
+                  "CaseSensitivePN" : false,
+                  "LoadPrivateDictionary" : true,
+                  "Dictionary" : {
+                  },
+                  "SynchronousCMove" : true,
+                  "JobsHistorySize" : 10,
+                  "SaveJobs" : true,
+                  "OverwriteInstances" : false,
+                  "MediaArchiveSize" : 1,
+                  "StorageAccessOnFind" : "Always",
+                  "MetricsEnabled" : true,
+                  "ExecuteLuaEnabled" : false,
+                  "HttpRequestTimeout" : 30,
+                  "DefaultPrivateCreator" : "",
+                  "StorageCommitmentReportsSize" : 100,
+                  "TranscodeDicomProtocol" : true,
+                  "BuiltinDecoderTranscoderOrder" : "After",
+                  "IngestTranscoding" : "1.2.840.10008.1.2.4.91",
+                  "IngestTranscodingOfUncompressed" : true,
+                  "IngestTranscodingOfCompressed" : true,
+                  "DicomLossyTranscodingQuality" : 90,
+                  "SyncStorageArea" : true,
+                  "MallocArenaMax" : 5,
+                  "DeidentifyLogs" : true,
+                  "DeidentifyLogsDicomVersion" : "2021b",
+                  "MaximumPduLength" : 16384,
+                  "CheckRevisions" : false,
+                  "SynchronousZipStream" : true,
+                  "ZipLoaderThreads": 0,
+                  "Warnings" : {
+                    "W001_TagsBeingReadFromStorage": true,
+                    "W002_InconsistentDicomTagsInDb": true
+                  },
+                  "OrthancExplorer2": {
+                    "IsDefaultUI": true,
+                    "UiOptions": {
+                      "EnableOpenInMedDreamViewer": true,
+                      "EnableOpenInOhifViewer3": true,
+                      "EnableShares": true,
+                      "DefaultShareDuration": 0,
+                      "ShareDurations": [0, 7, 15, 30, 90, 365]
+                    },
+                    "Tokens" : {
+                      "InstantLinksValidity": 3600,
+                      "ShareType": "meddream-viewer-publication"
+                    },
+                    "Keycloak" : {
+                      "Enable": true,
+                      "Url": "http://172.27.3.206/keycloak/",
+                      "Realm": "orthanc",
+                      "ClientId": "orthanc"
+                    }
+                  },
+                  "AuthenticationEnabled": false,     // because it is handled by the authorization plugin
+                  "Authorization": {
+                    "WebServiceRootUrl": "http://orthanc-auth-service:8000/",
+                    "WebServiceUsername": "share-user",
+                    "WebServicePassword": "change-me",
+                    "StandardConfigurations" : [
+                      "osimis-web-viewer",
+                      "stone-webviewer",
+                      "orthanc-explorer-2"
+                    ],
+                    "CheckedLevel": "studies"
+                  },
+                  "DicomWeb": {
+                    "Enable": true,
+                    "PublicRoot": "/orthanc/dicom-web/"
+                  },
+                  "Housekeeper": {
+                    "Enable": true,
+                    "GlobalPropertyId": 1025,
+                    "Force": false,
+                    "ThrottleDelay": 5,
+                    "Schedule": {
+                      "Monday": ["0-6", "20-24"],
+                      "Tuesday": ["0-6", "20-24"],
+                      "Wednesday": ["0-6", "20-24"],
+                      "Thursday": ["0-6", "20-24"],
+                      "Friday": ["0-6", "20-24"],
+                      "Saturday": ["22-24"],
+                      "Sunday": ["22-24"]
+                    },
+                    "Triggers" : {
+                      "StorageCompressionChange": true,
+                      "MainDicomTagsChange": true,
+                      "UnnecessaryDicomAsJsonFiles": true
+                    }
+                  },
+                  "WholeSlideImaging" : {
+                    "EnableIIIF" : true,
+                    "OrthancPublicURL" : "http://172.27.3.206/orthanc/ui/app",
+                    "ServeMirador" : true,
+                    "ServeOpenSeadragon" : true,
+                    "ForcePowersOfTwoScaleFactors" : true
+                  },
+                  "Tcia" : {
+                    "Enable" : true
+                  }
+                }     
+      volumes:
+        - name: keycloak-pv
+          persistentVolumeClaim:
+            claimName: keycloak-db-pvc
+
+
+
+
