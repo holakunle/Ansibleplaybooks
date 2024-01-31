@@ -6,7 +6,7 @@ metadata:
     name: nginx-orthanc-deployment
     app: orthanc
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
