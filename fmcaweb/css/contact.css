@@ -1,108 +1,110 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
-*
-{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Saira Condensed", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-nav{
-    background: whitesmoke;
-    text-align: right;
-    padding-bottom: 2px;
-    box-shadow: 0 0 25px 0 black;
-    position: sticky;
-    top: 0;
-    z-index: 3;
-}
-.logo{
-    float: left;
-    width: 70px;
-    margin: 30px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    margin-left: 80px;
-    border-radius: 100px;
-  
-  }
-.navlink{
-   display: inline-flex;
-   list-style: none;
-   color: rgb(255, 255, 255); 
-   pad
-}
-.navlink li{
-    width: 120px ;
-    padding: 15px;
-    margin: 15px;
-}
-.navlink li a{
+
+*{
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
     text-decoration: none;
-    color: green;
-    
+    text-transform: capitalize;
 }
-.anta-regular {
-    font-family: "Anta", sans-serif;
-    font-weight: bolder;
-    font-size: medium;
-  }
-  
-.navlink li a:hover{
-    color: darkgray;
+
+body{
+    min-height: 100vh;
 }
-.navlink .fa{
+
+header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: whitesmoke;
+    box-shadow: 0 5px 10px black ;
+    padding:0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+header .logo{
+   width: 70px;
+   border-radius: 100px;
+}
+
+header .navbar ul{
+    list-style: none;
+}
+
+header .navbar ul li{
+    position: relative;
+    float: left;
+}
+
+header .navbar ul li a{
+font-size: 20px;
+padding: 20px;
+color: rgba(0, 128, 0, 0.788);
+display: block;
+}
+
+header .navbar ul li a:hover{
+    color: white;
+    background: rgba(0, 128, 0, 0.788);
+}
+
+header .navbar .fa{
     margin-right: 8px;
 }
-.dropdown{
-    display: none;
-    background: whitesmoke;
-}
-.navlink li:hover .dropdown{
-    display: block;
+
+header .navbar ul li ul{
     position: absolute;
-    box-shadow: 0 0 20px 0 whitesmoke;
-    background: green
-    margin-top: 5px;
-    margin-left: -15px;
-    z-index: 3;
-}
-.navlink li:hover .dropdown ul{
-    display: block;
-    
-}
-.navlink li:hover .dropdown ul li{
-    width: 150px;
-    padding: 10px;
+    left: 0;
+    width: 200px;
     background: whitesmoke;
-    border-radius: 0;
-    text-align: left;
-}
-.navlink li:hover .dropdown ul li a:hover{
-    color: darkgray
-}
-.hamburger div{
-    width: 30px;
-    height: 3px;
-    background: black;
-    margin: 5px;
-    transition: all 0.3s ease;
-}
-.hamburger{
     display: none;
 }
-.lg{
-	display: none;
+header .navbar ul li ul li{
+    width: 100%;
+    
+    border-bottom: 1px solid rgba(0, 128, 0, 0.788);
 }
-.header{
+
+header .navbar ul li:focus-within > ul,
+header .navbar ul li:hover > ul{
+    display: initial;
+}
+
+#menu-bar{
+    display: none;
+}
+
+header label{
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  display: none;
+  border: 1px;
+  padding: 5px;
+  background: rgba(0, 128, 0, 0.788);
+  border-radius: 20px;
+}
+
+
+.headis{
+    
 	text-align: center;
 	padding-top: 55px;
+    
 	padding-bottom: 55px;
 	font-size: 50px;
 	color: #000000a2;
 	background: url('images/slider311.png');
 
+}
+.headis h1{
+    font-size: 60px;
+    text-align: center;
+    align-items: center;
 }
 .contact 
 {
@@ -162,13 +164,18 @@ nav{
 {
 	min-width: 60px;
 	height: 60px;
-	background: white;
+	background: rgb(204, 195, 195);
 	border: 1px solid black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1.75em;
 	transition: 0.5s;
+    color: #000;
+}
+.container .contactInfo .box .icon a{
+  text-decoration: none;
+  color: black;
 }
 .container .contactInfo .box:hover .icon 
 {
@@ -188,6 +195,10 @@ nav{
 {
 	font-weight: 400;
 	color: #449955;
+}
+.container .contactInfo .box .text h3 a{
+  
+  color:#449955 ;
 }
 .container .contactInfo .box .text p{
 	color: #449955;
@@ -293,6 +304,15 @@ nav{
 	color: #000;
 	border: 1px solid black;
 }
+
+
+/*for google map*/
+iframe{
+  width: 1500px;
+  display: flex;
+
+  
+}
 footer .wallpaper{
     margin-top: 40px;
     background: url(/images/footer-back.jpg);
@@ -309,7 +329,7 @@ footer .wallpaper{
   
   .row .logol h7{
     margin-bottom: 25px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -333,7 +353,7 @@ footer .wallpaper{
     margin-top: 20px;
   }
   .footer-colomn4 h6{
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     margin-bottom: 15px;
     font-size: 30px;
     font-style: 22px;
@@ -347,14 +367,14 @@ footer .wallpaper{
   }
   .footer-colomn3 .text-box h7{
     margin-bottom: 25px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     font-size: 30px;
     font-style: 22px;
      font-family: Arial, Helvetica, sans-serif;
   }
   .footer-colomn3 .text-box p{
     font-size: 15px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
   }
   
   
@@ -382,7 +402,7 @@ footer .wallpaper{
   }
   .footer-colomn .InputSubmit{
     padding: 8px 20px;
-    background-color: green;
+    background-color: rgba(0, 128, 0, 0.788);
     border: none;
     color: white;
   }
@@ -402,7 +422,7 @@ footer .wallpaper{
   }
   .footer-colomn34 h8{
     margin-left: 2px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -412,137 +432,55 @@ footer .wallpaper{
     font-size: 15px;
     font-family: "Saira Condensed", sans-serif;
   }
-@media only screen and (max-width: 1080px){
-    nav{
-        position: fixed;
-        z-index: 3;
+
+
+
+
+
+
+
+
+
+
+@media(max-width:991px){
+    header{
+        padding: 20px;
     }
-    .logo{
-     display: none;
+    header label{
+        display: initial;
     }
-    .navlink .fa{
-        
-    }
-    .navlink li:hover .dropdown{
-        display: block;
+    header .navbar{
         position: absolute;
-        margin-top: -40px;
-        margin-left: 100px;
-        }
-        .navlink li:hover .dropdown ul li{
-            margin-right: auto;
-            text-align: center;
-            background-color: #2bab0d;
-        }
-        .navlink li:hover .dropdown ul li a{
-            margin-left: -29px;
-            
-        }
-        .navlink li:hover .dropdown ul li a:hover{
-            color: black;
-        }
-        .row{
-          display: block;
-        }
- 
-    .hamburger{
-        display: inline-block;
-        position: absolute;
-        cursor: pointer;
-        right: auto;
-        top: 20%;
-        margin-top: 40px;
-        margin-left: 20px;
-        transform: translate(-5%, -50%);
-        z-index: 2;
-        
-        transition: all 0.5s ease;
+        top: 100%; left: 0; right: 0;
+        background: whitesmoke;
+        border-top: 1px solid black;
+        display: none;
     }
-    .navlink{
-        position: absolute;
-        display: block;
-        height: auto;
+
+    header .navbar ul li{
+        width: 100%;
+    }
+
+    header .navbar ul li ul{
+        position: relative;
+        width: 100%;
+    }
+    header .navbar ul li ul li{
+        background: whitesmoke;
+    }
+
+    #menu-bar:checked ~ .navbar{
+        display: initial;
+    }
+    .headis{
+        margin-top: 50px;
         width: auto;
-        margin-top: 5px;
-        margin-left: -15px;
-        
+        height:auto;
     }
-     .navlink .open{
-        clip-path: circle(1000px at 90% -10%);
-        -webkit-clip-path: circle(1000px at 90% -10%);
-        pointer-events: all;
-        display: block;
-        
-
+    marquee{
+        font-size: 15px;
     }
-    .navlink li{
-       opacity: 0; 
-       display: block;
-       width: 500px ;
-       padding: auto;
-       margin: auto;
-       background-color: #2bab0d;
-    }
-    .navlink li:nth-child(1){
-        transition: all 0.5s ease 0.2s;
-    }
-    .navlink li:nth-child(2){
-        transition: all 0.5s ease 0.4s;
-    }
-    .navlink li:nth-child(3){
-        transition: all 0.5s ease 0.6s;
-    }
-    .navlink li:nth-child(4){
-        transition: all 0.5s ease 0.7s;
-    }
-    .navlink li:nth-child(5){
-        transition: all 0.5s ease 0.8s;
-    }
-    .navlink li:nth-child(6){
-        transition: all 0.5s ease 0.9s;
-        margin: 0;
-    }
-    .navlink li:nth-child(7){
-        transition: all 0.5s ease 1s;
-        margin: 0;
-    }
-    li.fade{
-        opacity: 1;
-    }
-    .navlink li a{
-       display: block;
-       height: 100%;
-       width: 100%;
-       line-height: 40px;
-       font-size: 15px;
-       font-weight: bold;
-       color: whitesmoke;
-       transition: .4s;
-       text-align: center;
-       padding-left: 50px;
-    }
-    .navlink li a:hover{
-        color: black;
-    }
-
-}
-
-.toggle .line1{
-    transform: rotate(-45deg) translate(-5px,6px)
-}
-.toggle .line2{
-    transition: all 0.7s ease;
-    width:0;
- }
- .toggle .line3{
-    transform: rotate(45deg) translate(-5px,-6px);
- }
- 
-
-/* lets make it responsive */
-@media (max-width: 991px)
-{
-	.contact
+    .contact
 	{
 		padding: 50px;
 	}
@@ -559,4 +497,13 @@ footer .wallpaper{
 	{
 		padding: 50px 30px;
 	}
+
+    .row{
+        display: block;
+    }
+    iframe{
+      width: 500px;
+      
+    }
 }
+

@@ -1,91 +1,95 @@
 *{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Saira Condensed", sans-serif;
-font-weight: 500;
-font-style: normal;
-    
-}
-body{
-    background: #ddd;
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: capitalize;
 }
 
-nav{
+body{
+    min-height: 100vh;
+}
+
+header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
     background: whitesmoke;
-    text-align: right;
-    padding-bottom: 2px;
-    box-shadow: 0 0 25px 0 black;
-    position: sticky;
-    top: 0;
-    z-index: 3;
+    box-shadow: 0 5px 10px black ;
+    padding:0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
 }
-.logo{
+
+header .logo{
+   width: 70px;
+   border-radius: 100px;
+}
+
+header .navbar ul{
+    list-style: none;
+}
+
+header .navbar ul li{
+    position: relative;
     float: left;
-    width: 70px;
-    margin: 30px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    margin-left: 80px;
-    border-radius: 100px;
-  
-  }
-.navlink{
-   display: inline-flex;
-   list-style: none;
-   color: rgb(255, 255, 255); 
-   pad
 }
-.navlink li{
-    width: 120px ;
-    padding: 15px;
-    margin: 15px;
+
+header .navbar ul li a{
+font-size: 20px;
+padding: 20px;
+color: rgba(0, 128, 0, 0.788);
+display: block;
 }
-.navlink li a{
-    text-decoration: none;
-    color: green;
-    
+
+header .navbar ul li a:hover{
+    color: white;
+    background: rgba(0, 128, 0, 0.788);
 }
-.anta-regular {
-    font-family: "Anta", sans-serif;
-    font-weight: bolder;
-    font-size: medium;
-  }
-  
-.navlink li a:hover{
-    color: darkgray;
-}
-.navlink .fa{
+
+header .navbar .fa{
     margin-right: 8px;
 }
-.dropdown{
-    display: none;
-    background: whitesmoke;
-}
-.navlink li:hover .dropdown{
-    display: block;
+
+header .navbar ul li ul{
     position: absolute;
-    box-shadow: 0 0 20px 0 whitesmoke;
-    background: green
-    margin-top: 5px;
-    margin-left: -15px;
-    z-index: 3;
-}
-.navlink li:hover .dropdown ul{
-    display: block;
-    
-}
-.navlink li:hover .dropdown ul li{
-    width: 150px;
-    padding: 10px;
+    left: 0;
+    width: 200px;
     background: whitesmoke;
-    border-radius: 0;
-    text-align: left;
+    display: none;
 }
-.navlink li:hover .dropdown ul li a:hover{
-    color: darkgray
+header .navbar ul li ul li{
+    width: 100%;
+    
+    border-bottom: 1px solid rgba(0, 128, 0, 0.788);
 }
-.header{
+
+header .navbar ul li:focus-within > ul,
+header .navbar ul li:hover > ul{
+    display: initial;
+}
+
+#menu-bar{
+    display: none;
+}
+
+header label{
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  display: none;
+  border: 1px;
+  padding: 5px;
+  background: rgba(0, 128, 0, 0.788);
+  border-radius: 20px;
+}
+
+
+
+.headis{
 	text-align: center;
 	padding-top: 55px;
 	padding-bottom: 55px;
@@ -115,7 +119,8 @@ nav{
     height: auto;
     margin: 20px;
     text-align: center;
-    border: 10px groove black;
+    border: 10px groove rgba(0, 0, 0, 0.226);
+    box-shadow: 0 10px 30px black;
   }
   
   .overlay {
@@ -183,7 +188,7 @@ nav{
   }
   .row .logol h7{
     margin-bottom: 25px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -207,7 +212,7 @@ nav{
     margin-top: 20px;
   }
   .footer-colomn4 h6{
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     margin-bottom: 15px;
     font-size: 30px;
     font-style: 22px;
@@ -221,14 +226,14 @@ nav{
   }
   .footer-colomn3 .text-box h7{
     margin-bottom: 25px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     font-size: 30px;
     font-style: 22px;
      font-family: Arial, Helvetica, sans-serif;
   }
   .footer-colomn3 .text-box p{
     font-size: 15px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
   }
   
   
@@ -256,7 +261,7 @@ nav{
   }
   .footer-colomn .InputSubmit{
     padding: 8px 20px;
-    background-color: green;
+    background-color: rgba(0, 128, 0, 0.788);
     border: none;
     color: white;
   }
@@ -275,7 +280,7 @@ nav{
   }
   .footer-colomn34 h8{
     margin-left: 2px;
-    color: green;
+    color: rgba(0, 128, 0, 0.788);
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -284,161 +289,61 @@ nav{
     color: whitesmoke;
     font-size: 15px;
   }
- 
-.hamburger div{
-    width: 30px;
-    height: 3px;
-    background: black;
-    margin: 5px;
-    transition: all 0.3s ease;
-}
-.hamburger{
-    display: none;
-}
 
 
-@media only screen and (max-width: 1080px){
-    nav{
-        position: fixed;
-        z-index: 3;
-  
+
+
+
+
+
+
+
+
+
+
+@media(max-width:991px){
+    header{
+        padding: 20px;
     }
-    .overlay {
-    opacity:;
+    header label{
+        display: initial;
     }
-    .logo{
-    display: none;
-
-}
-
-
-    .navlink .fa{
-        
-    }
-    .navlink li:hover .dropdown{
-        display: block;
+    header .navbar{
         position: absolute;
-        margin-top: -40px;
-        margin-left: 100px;
-        }
-        .navlink li:hover .dropdown ul li{
-            margin-right: auto;
-            text-align: center;
-            background-color: #2bab0d;
-        }
-        .navlink li:hover .dropdown ul li a{
-            margin-left: -29px;
-            
-        }
-        .navlink li:hover .dropdown ul li a:hover{
-            color: black;
-        }
-        .row{
-            display: block;
-          }
-          .team{
-            display: block;
-          }
-          .hamburger{
-              display: inline-block;
-              position: absolute;
-              cursor: pointer;
-              right: auto;
-              top: 20%;
-              margin-top: 40px;
-              margin-left: 20px;
-              transform: translate(-5%, -50%);
-              z-index: 2;
-              
-              transition: all 0.5s ease;
-          }
-          .navlink{
-              position: absolute;
-              display: block;
-              height: auto;
-              width: auto;
-              margin-top: 5px;
-              margin-left: -15px;
-              
-          }
-           .navlink .open{
-              clip-path: circle(1000px at 90% -10%);
-              -webkit-clip-path: circle(1000px at 90% -10%);
-              pointer-events: all;
-              display: block;
-              
-      
-          }
-          .navlink li{
-             opacity: 0; 
-             display: block;
-             width: 500px ;
-             padding: auto;
-             margin: auto;
-             background-color: #2bab0d;
-          }
-          .navlink li:nth-child(1){
-              transition: all 0.5s ease 0.2s;
-          }
-          .navlink li:nth-child(2){
-              transition: all 0.5s ease 0.4s;
-          }
-          .navlink li:nth-child(3){
-              transition: all 0.5s ease 0.6s;
-          }
-          .navlink li:nth-child(4){
-              transition: all 0.5s ease 0.7s;
-          }
-          .navlink li:nth-child(5){
-              transition: all 0.5s ease 0.8s;
-          }
-          .navlink li:nth-child(6){
-              transition: all 0.5s ease 0.9s;
-              margin: 0;
-          }
-          .navlink li:nth-child(7){
-              transition: all 0.5s ease 1s;
-              margin: 0;
-          }
-          li.fade{
-              opacity: 1;
-          }
-          .navlink li a{
-             display: block;
-             height: 100%;
-             width: 100%;
-             line-height: 40px;
-             font-size: 15px;
-             font-weight: bold;
-             color: whitesmoke;
-             transition: .4s;
-             text-align: center;
-             padding-left: 50px;
-          }
-          .navlink li a:hover{
-              color: black;
-          }
-          .container:hover .overlay {
-            opacity: 15;
-          }
-          .container1:hover .overlay {
-            opacity: 15;
-          }
-          .container1{
-            margin-left: 0;
-          }
-      
-      }
-      
-      .toggle .line1{
-          transform: rotate(-45deg) translate(-5px,6px)
-      }
-      .toggle .line2{
-          transition: all 0.7s ease;
-          width:0;
-       }
-       .toggle .line3{
-          transform: rotate(45deg) translate(-5px,-6px);
-       }
+        top: 100%; left: 0; right: 0;
+        background: whitesmoke;
+        border-top: 1px solid black;
+        display: none;
+    }
 
- 
+    header .navbar ul li{
+        width: 100%;
+    }
+
+    header .navbar ul li ul{
+        position: relative;
+        width: 100%;
+    }
+    header .navbar ul li ul li{
+        background: whitesmoke;
+    }
+
+    #menu-bar:checked ~ .navbar{
+        display: initial;
+    }
+    .headis{
+        margin-top: 50px;
+        width: auto;
+        height:auto;
+   
+}
+   .row{
+   display: block;
+   }
+
+.container1{
+    display: block;
+    margin-left: 130px;
+}
+
+}
