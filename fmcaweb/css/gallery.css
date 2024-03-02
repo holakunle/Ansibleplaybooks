@@ -5,14 +5,14 @@
     font-family: "Saira Condensed", sans-seri
 }
 .top{
-    background: rgba(0, 128, 0, 0.788);
+    background: rgb(108, 172, 13);
 }
 ul.breadcrumb {
     padding: 10px 16px;
     margin-top: 20px;
     list-style: none;
-    background-color: rgba(0, 128, 0, 0.788)green;
-    border: 4px groove rgba(0, 128, 0, 0.788);
+    background-color: rgb(108, 172, 13);
+    border: 4px groove rgb(108, 172, 13);
   }
   ul.breadcrumb li {
     display: inline;
@@ -48,7 +48,7 @@ h1::before{
     position: absolute;
     width: 100px;
     height: 3px;
-    background-color: rgba(0, 128, 0, 0.788);
+    background-color: rgb(108, 172, 13);
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
@@ -78,7 +78,7 @@ h1::before{
 }
 h3{
     height: 100%;
-    background-color: rgba(0, 128, 0, 0.788);
+    background-color: rgb(108, 172, 13);
     line-height: 60px;
     padding: 0 50px;
     color: white;
@@ -144,7 +144,7 @@ h3{
 }
 
 footer{
-    background: rgba(0, 128, 0, 0.788);
+    background: rgb(108, 172, 13);
     
 
 }

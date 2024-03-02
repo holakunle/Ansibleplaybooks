@@ -41,13 +41,13 @@ header .navbar ul li{
 header .navbar ul li a{
 font-size: 20px;
 padding: 20px;
-color: rgba(0, 128, 0, 0.788);
+color: rgb(108, 172, 13);
 display: block;
 }
 
 header .navbar ul li a:hover{
     color: white;
-    background: rgba(0, 128, 0, 0.788);
+    background: rgb(108, 172, 13);
 }
 
 header .navbar .fa{
@@ -64,7 +64,7 @@ header .navbar ul li ul{
 header .navbar ul li ul li{
     width: 100%;
     
-    border-bottom: 1px solid rgba(0, 128, 0, 0.788);
+    border-bottom: 1px solid rgb(108, 172, 13);
 }
 
 header .navbar ul li:focus-within > ul,
@@ -83,7 +83,7 @@ header label{
   display: none;
   border: 1px;
   padding: 5px;
-  background: rgba(0, 128, 0, 0.788);
+  background: rgb(108, 172, 13);
   border-radius: 20px;
 }
 
@@ -189,7 +189,7 @@ header label{
   }
   .row .logol h7{
     margin-bottom: 25px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -213,21 +213,21 @@ header label{
     margin-top: 20px;
   }
   .footer-colomn4 h6{
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     margin-bottom: 15px;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
   }
   .footer-colomn4 ul li{
-    color: rgb(0, 255, 47);
+    color: rgb(108, 172, 13);
   }
   .footer-colomn4 ul i{
     color: black
   }
   .footer-colomn3 .text-box h7{
     margin-bottom: 25px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
      font-family: Arial, Helvetica, sans-serif;
@@ -281,7 +281,7 @@ header label{
   }
   .footer-colomn34 h8{
     margin-left: 2px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;

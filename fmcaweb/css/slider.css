@@ -4,7 +4,7 @@ html,body{
 }
 .galleryContainer{
     width: 100%;
-    height: 500px;
+    height: 700px;
     max-width: 2000px;
     margin: auto;
     user-select: none;
@@ -206,7 +206,9 @@ html,body{
 @media(max-width:991px){
     .galleryContainer{
         display: block;
-        height: 30vh
+        height: 30vh;
+        width: auto;
+        
     }
     
 }

@@ -8,10 +8,13 @@
     font-style: normal;
     text-decoration: none;
     text-transform: capitalize;
+    
 }
 
 body{
     min-height: 100vh;
+    
+   
 }
 
 header{
@@ -43,13 +46,13 @@ header .navbar ul li{
 header .navbar ul li a{
 font-size: 20px;
 padding: 20px;
-color: rgba(0, 128, 0, 0.788);
+color: rgb(108, 172, 13);
 display: block;
 }
 
 header .navbar ul li a:hover{
     color: white;
-    background: rgba(0, 128, 0, 0.788);
+    background: rgb(108, 172, 13);
 }
 
 header .navbar .fa{
@@ -66,7 +69,7 @@ header .navbar ul li ul{
 header .navbar ul li ul li{
     width: 100%;
     
-    border-bottom: 1px solid rgba(0, 128, 0, 0.788);
+    border-bottom: 1px solid rgb(108, 172, 13);
 }
 
 header .navbar ul li:focus-within > ul,
@@ -85,7 +88,7 @@ header label{
   display: none;
   border: 1px;
   padding: 5px;
-  background: rgba(0, 128, 0, 0.788);
+  background: rgb(108, 172, 13);
   border-radius: 20px;
 }
 
@@ -194,14 +197,14 @@ header label{
 .container .contactInfo .box .text h3 
 {
 	font-weight: 400;
-	color: #449955;
+	color: black;
 }
 .container .contactInfo .box .text h3 a{
   
-  color:#449955 ;
+  color:black ;
 }
 .container .contactInfo .box .text p{
-	color: #449955;
+	color: rgba(0, 0, 0, 0.514);
 	font-weight: 700;
 }
 .container .contactInfo .txt
@@ -292,7 +295,7 @@ header label{
 {
 	width: 100px;
 	color: white;
-	background: rgba(3, 48, 3, 0.959);
+	background: rgba(0, 0, 0, 0.514);
 	border: none;
 	cursor: pointer;
 	padding: 10px;
@@ -329,7 +332,7 @@ footer .wallpaper{
   
   .row .logol h7{
     margin-bottom: 25px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -353,28 +356,28 @@ footer .wallpaper{
     margin-top: 20px;
   }
   .footer-colomn4 h6{
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     margin-bottom: 15px;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
   }
   .footer-colomn4 ul li{
-    color: rgb(0, 255, 47);
+    color: rgb(108, 172, 13);
   }
   .footer-colomn4 ul i{
     color: black
   }
   .footer-colomn3 .text-box h7{
     margin-bottom: 25px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
      font-family: Arial, Helvetica, sans-serif;
   }
   .footer-colomn3 .text-box p{
     font-size: 15px;
-    color: rgba(0, 128, 0, 0.788);
+    color: rgb(108, 172, 13);
   }
   
   
@@ -422,7 +425,7 @@ footer .wallpaper{
   }
   .footer-colomn34 h8{
     margin-left: 2px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -436,7 +439,10 @@ footer .wallpaper{
 
 
 
+ 
+   
 
+  
 
 
 
@@ -487,6 +493,7 @@ footer .wallpaper{
 	.container
 	{
 		flex-direction: column;
+    width: auto;
 	}
 	.container .contactInfo,
 	.container .contactForm
@@ -502,8 +509,12 @@ footer .wallpaper{
         display: block;
     }
     iframe{
-      width: 500px;
+      width: 359px;
       
+      
+    }
+    body{
+      width: 359px;
     }
 }
 

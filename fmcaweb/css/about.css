@@ -41,13 +41,13 @@ header .navbar ul li{
 header .navbar ul li a{
 font-size: 20px;
 padding: 20px;
-color: rgba(0, 128, 0, 0.788);
+color: rgb(108, 172, 13);
 display: block;
 }
 
 header .navbar ul li a:hover{
     color: white;
-    background: rgba(0, 128, 0, 0.788);
+    background: rgb(108, 172, 13);
 }
 
 header .navbar .fa{
@@ -64,7 +64,7 @@ header .navbar ul li ul{
 header .navbar ul li ul li{
     width: 100%;
     
-    border-bottom: 1px solid rgba(0, 128, 0, 0.788);
+    border-bottom: 1px solid rgb(108, 172, 13);
 }
 
 header .navbar ul li:focus-within > ul,
@@ -85,7 +85,7 @@ header label{
     display: none;
     border: 1px;
     padding: 5px;
-    background: rgba(0, 128, 0, 0.788);
+    background: rgb(108, 172, 13);
     border-radius: 20px;
 }
 
@@ -114,13 +114,14 @@ header label{
     
 }
 .intro h1{
-    color: rgba(0, 128, 0, 0.788);
+    color: rgb(108, 172, 13);
 }
 .intro p{
     margin-right: 20px;
     font-size: 20px;
     line-height: 1.5;
     color: #000000c9;
+    font-weight: 300;
 }
 /* for partners*/
 .partner{
@@ -132,9 +133,9 @@ header label{
   font-size: 50px;
 }
 .partner .pic{
-  width: 180px;
+  width: 150px;
   padding: 20px;
-  height: 150px;
+  height: 130px;
   border-radius: 25px;
   
 }
@@ -163,7 +164,7 @@ footer .wallpaper{
   }
   .row .logol h7{
     margin-bottom: 25px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -187,28 +188,28 @@ footer .wallpaper{
     margin-top: 20px;
   }
   .footer-colomn4 h6{
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     margin-bottom: 15px;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
   }
   .footer-colomn4 ul li{
-    color: rgb(0, 255, 47);
+    color: rgb(108, 172, 13);
   }
   .footer-colomn4 ul i{
     color: black
   }
   .footer-colomn3 .text-box h7{
     margin-bottom: 25px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
      font-family: Arial, Helvetica, sans-serif;
   }
   .footer-colomn3 .text-box p{
     font-size: 15px;
-    color: rgb(0, 128, 0, 0.788);
+    color: rgb(108, 172, 13);
   }
   
   
@@ -236,7 +237,7 @@ footer .wallpaper{
   }
   .footer-colomn .InputSubmit{
     padding: 8px 20px;
-    background-color: rgba(0, 128, 0, 0.788);
+    background-color: rgb(108, 172, 13);
     border: none;
     color: white;
   }
@@ -255,7 +256,7 @@ footer .wallpaper{
   }
   .footer-colomn34 h8{
     margin-left: 2px;
-    color: rgba(0, 128, 0, 0.788);
+    color: whitesmoke;
     font-size: 30px;
     font-style: 22px;
     font-family: "Saira Condensed", sans-serif;
@@ -308,6 +309,7 @@ footer .wallpaper{
     }
     .intro{
         display: block;
+        width: auto;
     }
    .row{
     display: block;
@@ -317,17 +319,17 @@ footer .wallpaper{
    }
    .headis h2{
     width: 100%;
-    height: 30vh;
-    font-size: 60px;
+    height: 30%;
+    font-size: 50px;
    }
    .hodpic{
-    width: 250px;
+    width: 180px;
     height: 50vh;
    }
    .intro p{
     width: 250px;
     text-align: left;
-    align-items: ;
+    
    }
 }
 
