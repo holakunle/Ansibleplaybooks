@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="icon" type="image/x-icon" href="/imagges/logo1.png">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anta&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body style="background: #ddd;">
+<div class="top">
+    <ul class="breadcrumb">
+        <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
+        <li>Gallery</li>
+      </ul>
+</div>
+      <div class="container">
+        <h1 style="color: rgba(0, 0, 0, 0.712);">OUR PHOTO GALLERY</h1>
+        <div class="top-content">
+            <h3>Photo Gallery</h3>
+            <label for="check1"></label>
+            <label for="check2"></label>
+            <label for="check3"></label>
+            <label for="check4"></label>
+        </div>
+        <div class="wrapper">
+            <div class="image-wrapper">
+                <div class="image"><img src="imagges/t .jpg" alt=""></div>
+                <div class="image"><img src="imagges/tt.jpg" alt=""></div>
+                <div class="image"><img src="imagges/ttt.jpg" alt=""></div>
+                <div class="image"><img src="imagges/tttt.jpg" alt=""></div>
+                <div class="image"><img src="imagges/ttttt.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training1.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training4.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training5.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training2.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training3.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training8.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training9.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training10.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training11.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training2 (1).jpg" alt=""></div>
+                <div class="image"><img src="imagges/training7.jpg" alt=""></div>
+                <div class="image"><img src="imagges/training3.jpg" alt=""></div>
+            </div>
+
+            <div class="popup-image">
+                <span>&times;</span>
+                <img src="imagges/training1.jpg" alt="">
+
+            </div>
+        </div>
+        <script>
+            document.querySelectorAll('.image-wrapper img').forEach(image=>{
+                image.onclick = () =>{
+                    document.querySelector('.popup-image').style.display = 'block';
+                    document.querySelector('.popup-image img').src = image.getAttribute('src'); 
+                }
+            })
+            document.querySelector('.popup-image span').onclick = () =>{
+                document.querySelector('.popup-image').style.display = 'none';
+            }
+        </script>
+<footer>
+    <div class="rowl">
+        <div class="coll">
+            <p>&#169; 2024 FMCAEMR All Right Reserved.</p>
+        </div>
+</footer>
+</body>
+</html>
