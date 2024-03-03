@@ -310,7 +310,9 @@ footer .wallpaper{
     .intro{
         display: block;
         width: auto;
+        text-align: left;
     }
+    
    .row{
     display: block;
    }
@@ -324,11 +326,12 @@ footer .wallpaper{
    }
    .hodpic{
     width: 180px;
-    height: 50vh;
+    height: 40vh;
    }
    .intro p{
     width: 250px;
     text-align: left;
+    
     
    }
 }
