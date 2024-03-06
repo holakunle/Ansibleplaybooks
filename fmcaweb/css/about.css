@@ -1,0 +1,339 @@
+*{
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+body{
+    min-height: 100vh;
+}
+
+header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: whitesmoke;
+    box-shadow: 0 5px 10px black ;
+    padding:0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+header .logo{
+   width: 60px;
+   border-radius: 100px;
+}
+
+header .navbar ul{
+    list-style: none;
+}
+
+header .navbar ul li{
+    position: relative;
+    float: left;
+}
+
+header .navbar ul li a{
+font-size: 20px;
+padding: 20px;
+color: rgb(108, 172, 13);
+display: block;
+}
+
+header .navbar ul li a:hover{
+    color: white;
+    background: rgb(108, 172, 13);
+}
+
+header .navbar .fa{
+    margin-right: 8px;
+}
+
+header .navbar ul li ul{
+    position: absolute;
+    left: 0;
+    width: 200px;
+    background: whitesmoke;
+    display: none;
+}
+header .navbar ul li ul li{
+    width: 100%;
+    
+    border-bottom: 1px solid rgb(108, 172, 13);
+}
+
+header .navbar ul li:focus-within > ul,
+header .navbar ul li:hover > ul{
+    display: initial;
+    
+}
+
+#menu-bar{
+    display: none;
+    
+}
+
+header label{
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    display: none;
+    border: 1px;
+    padding: 5px;
+    background: rgb(108, 172, 13);
+    border-radius: 20px;
+}
+
+
+
+
+.hodpic{
+    margin-left: 10px;
+    width: auto;
+    height: 70vh;
+    margin-bottom: 20px;
+    box-shadow:0 3px 20px black ;
+  }
+  .headis h2{
+    text-align: center;
+    background: url(/images/slider31.png);
+    padding: 55px 55px;
+    font-size: 70px;
+    color: rgba(0, 0, 0, 0.712);
+}
+  .intro{
+    display: flex;
+    background: #ddd;
+    height: auto;
+    padding: 119px;
+    
+}
+.intro h1{
+    color: rgb(108, 172, 13);
+}
+.intro p{
+    margin-right: 20px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #000000c9;
+    font-weight: 300;
+}
+/* for partners*/
+.partner{
+  align-items: center;
+  text-align: center;
+  background: white;
+}
+.partner h2{
+  font-size: 50px;
+}
+.partner .pic{
+  width: 150px;
+  padding: 20px;
+  height: 130px;
+  border-radius: 25px;
+  
+}
+.partner .pic:hover{
+  filter: grayscale(100%);
+}
+
+
+
+
+footer .wallpaper{
+    margin-top: 0px;
+    background: url(/images/footer-back.jpg);
+    border: none;
+  }
+  .row{
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    padding: 40px 80px;
+    text-align: left;
+
+  }
+  .row .fa{
+    margin-right: 8px;
+  }
+  .row .logol h7{
+    margin-bottom: 25px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-style: 22px;
+    font-family: "Saira Condensed", sans-serif;
+  }
+  .row .logol p {
+    color: whitesmoke;
+    font-family: "Saira Condensed", sans-serif;
+ }
+ .wallpaper .row .footer-colomn .logol .fa{
+    margin-left: 8px;
+ }
+ 
+  .footer .footer-colomn ul{
+    list-style: none;
+  }
+  
+  .footer-colomn3 .text-box p{
+    font-size: larger;
+    display: inline-block;
+    color: whitesmoke;
+    margin-top: 20px;
+  }
+  .footer-colomn4 h6{
+    color: whitesmoke;
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-style: 22px;
+    font-family: "Saira Condensed", sans-serif;
+  }
+  .footer-colomn4 ul li{
+    color: rgb(108, 172, 13);
+  }
+  .footer-colomn4 ul i{
+    color: black
+  }
+  .footer-colomn3 .text-box h7{
+    margin-bottom: 25px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-style: 22px;
+     font-family: Arial, Helvetica, sans-serif;
+  }
+  .footer-colomn3 .text-box p{
+    font-size: 15px;
+    color: rgb(108, 172, 13);
+  }
+  
+  
+  .footer-colomn4 ul li{
+    padding: 10px 0;
+  }
+  .footer-colomn4 ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    opacity: 0.7s;
+    transition: 0.5s;
+  }
+  .footer-colomn4 ul li a:hover{
+    opacity: 1;
+    color: black;
+  }
+  .footer-colomn input{
+    border: none;
+    width: 250px;
+    height: 45px;
+    display: block;
+    padding-left: 20px;
+    margin: 14px 0;
+  }
+  .footer-colomn .InputSubmit{
+    padding: 8px 20px;
+    background-color: rgb(108, 172, 13);
+    border: none;
+    color: white;
+  }
+  .rowl .coll p{
+    color: white;
+    padding-bottom: 10px;
+    justify-self: center;
+    text-align: center;
+  }
+  .row .socialIcons i{
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    margin: 0 15px;
+    transition: 0.5s;
+  }
+  .footer-colomn34 h8{
+    margin-left: 2px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-style: 22px;
+    font-family: "Saira Condensed", sans-serif;
+  }
+  .footer-colomn34 p{
+    color: whitesmoke;
+    font-size: 15px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:991px){
+    header{
+        padding: 20px;
+    }
+    header label{
+        display: initial;
+    }
+    header .navbar{
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: whitesmoke;
+        border-top: 1px solid black;
+        display: none;
+    }
+
+    header .navbar ul li{
+        width: 100%;
+    }
+
+    header .navbar ul li ul{
+        position: relative;
+        width: 100%;
+    }
+    header .navbar ul li ul li{
+        background: whitesmoke;
+    }
+
+    #menu-bar:checked ~ .navbar{
+        display: initial;
+    }
+    .intro{
+        display: block;
+        width: auto;
+        text-align: left;
+    }
+    
+   .row{
+    display: block;
+   }
+   .partner{
+    display:block;
+   }
+   .headis h2{
+    width: 100%;
+    height: 30%;
+    font-size: 50px;
+   }
+   .hodpic{
+    width: 180px;
+    height: 40vh;
+   }
+   .intro p{
+    width: 250px;
+    text-align: left;
+
+    
+    
+   }
+}
+

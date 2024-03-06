@@ -1,0 +1,685 @@
+*{
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: capitalize;
+    
+    
+}
+
+body{
+    min-height: 100vh;
+    
+    
+}
+
+header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: whitesmoke;
+    box-shadow: 0 5px 10px black ;
+    padding:0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+header .logo{
+   width: 60px;
+   border-radius: 100px;
+   
+
+}
+
+header .navbar ul{
+    list-style: none;
+}
+
+header .navbar ul li{
+    position: relative;
+    float: left;
+}
+
+header .navbar ul li a{
+font-size: 17px;
+padding: 20px;
+color: rgb(108, 172, 13);
+display: block;
+font-weight: 700;
+}
+
+header .navbar ul li a:hover{
+    color: white;
+    background: rgb(108, 172, 13);
+}
+
+header .navbar .fa{
+    margin-right: 8px;
+}
+
+header .navbar ul li ul{
+    position: absolute;
+    left: 0;
+    width: 200px;
+    background: whitesmoke;
+    display: none;
+}
+header .navbar ul li ul li{
+    width: 100%;
+    
+    border-bottom: 1px solid rgb(108, 172, 13);
+}
+
+header .navbar ul li:focus-within > ul,
+header .navbar ul li:hover > ul{
+    display: initial;
+}
+
+#menu-bar{
+    display: none;
+
+}
+
+header label{
+  float: r;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    display: none;
+    border: 1px;
+    padding: 5px;
+    background: rgb(108, 172, 13);
+    border-radius: 20px;
+}
+
+.headis{
+    
+    text-align: center; 
+    background: rgb(108, 172, 13);
+    color: white; 
+    width: auto;
+    height: 8vh;
+}
+marquee{
+    font-size: 23px;
+    color: white;
+    border-bottom: 3px;
+}
+
+
+
+/*for article
+
+
+article1{
+    display: inline-block;
+    margin-left: 120px;
+    margin: 0;
+    
+    color: rgba(0, 0, 0, 0.774);
+    width: 440px;
+    padding-left: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    
+   
+
+}
+
+.art{
+    display: flex;
+    margin-top: 50px;
+    margin: 20px;
+    height: 45vh;
+    padding-left: 1px;
+    border: 90px;
+    justify-content: center;
+    width: 100%;
+   
+   
+}
+article1 h2{
+    padding-bottom: 20px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 40px;
+    color: rgba(0, 128, 0, 0.788);
+}
+
+
+article1 p{
+  
+    padding-bottom: 20px;
+    line-height: 20px;
+    font-weight: 300;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 5px;
+  }
+
+ 
+
+
+/*
+.middle{
+    background: rgb(95, 151, 12);
+    padding-right: 9px;
+    
+}
+.middle p{
+  font-weight: 300;
+  font-size: 20px;
+  font-weight: 300;
+
+}
+
+ /* intro*/
+.intro{
+    display: flex;
+    margin-top: 70px;
+    background: whitesmoke;
+    text-align: center;
+    padding: 20px;
+    margin: 80px;
+    padding-bottom: 10px;
+    background: rgb(108, 172, 13);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 3px 25px 0 black;
+    
+
+  }
+ .intro h2{
+    padding-left: 20px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  .intro h3{
+    text-align: center;
+    font-size: 35px;
+    font-weight: bolder;
+    margin-top: -20px;
+    padding-top: 15px;
+    color:white;
+  }
+  .intro p1{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 200;
+  }
+  .intro p{
+    text-align: left;
+    color: white;
+    font-size: 20px;
+    font-weight: 200;
+    margin: 50px;
+
+}
+.hodpic{
+    width: 250px; 
+      margin-top: 15px;
+     margin-right: 10px;
+     margin-left: 50px;
+     
+     box-shadow:0 3px 20px black ;
+     border-radius: 0;
+  }
+
+  .oga p{
+    text-align: center;
+  }
+
+/* read more*/
+/*
+  .read-more1{
+    text-align: left;
+    margin-bottom: 10px;
+    
+  }
+  .read-more1 a{
+    text-decoration: none;
+    padding: 5px;
+    border: 1px solid white;
+    color: white;
+    border-radius: 4px;
+    
+  }
+  
+  .read-more1 a:hover{
+    color: rgb(108, 172, 13);
+    background-color: white;
+  }
+  */
+
+  /* former service css
+  .wrapper{
+    text-align: center;
+    margin-top: 55px;
+   
+    
+  }
+  .wrapper .service{
+    display: inline-flex;
+    width: 200px;
+    height: 30vh;
+    border: 2px solid whitesmoke;
+    box-shadow: 0 0 15px 0 black;
+   
+    border-radius: 80px;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .wrapper .service:hover{
+    border: 7px solid whitesmoke;
+    box-shadow: 0 0 15px 0 black;
+  }
+  .wrapper article{
+    text-align: center;
+   
+    display: inline-block;
+    width: 250px;
+    margin: 30px
+  }
+  .wrapper article h5{
+    color: rgba(0, 128, 0, 0.788);
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+    text-shadow: 0 0 15px 0 black;
+  }
+  .wrapper article p{
+    color: rgba(0, 128, 0, 0.788);
+    text-align: center;
+  }
+
+
+
+
+
+ /* for cmd, hcs and hou*/
+ section{
+  border: 10px solid whitesmoke;
+ 
+  text-align: center;
+  
+}
+section .text-container {
+  display: flex;
+  margin-bottom: 2px;
+  justify-content: center;
+  
+}
+section .text-container .text-box {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid white;
+
+}
+
+ 
+section .text-container .text-box h5{
+  color: rgb(108, 172, 13);
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+}
+section .text-container .text-box p{
+  color: rgba(0, 0, 0, 0.486);
+  font-weight: 700;
+  font-size: 13px;
+  
+}
+section h2{
+  font-size: 75px;
+  padding-top: 100px;
+  font-family: "Saira Condensed", sans-serif;
+font-weight: 600;
+color: rgb(108, 172, 13);
+}
+section h4{
+  padding-bottom: 20px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 40px;
+    color: rgb(108, 172, 13);
+}
+section p{
+  color: rgba(182, 29, 29, 0.425));
+}
+section .service{
+  width: 250px;
+}
+
+section .text-container .text-box img{
+  height: 170px;
+  border: 2px solid whitesmoke;
+  box-shadow: 0 0 15px 0 black;
+  border-radius: 20px;
+}
+
+section .text-container .text-box img:hover{
+  border: 7px solid rgb(108, 172, 13);
+  transition: .5s ease-in-out;
+    
+}
+
+
+
+
+
+
+
+  footer .wallpaper{
+    margin-top: 40px;
+    background: url(/images/footer-back.jpg);
+    border: none;
+  }
+  .row{
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    padding: 40px 80px;
+    text-align: left;
+
+  }
+  .row .fa{
+    margin-right: 8px;
+  }
+  .row .logol h7{
+    margin-bottom: 25px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-style: 22px;
+    font-family: "Saira Condensed", sans-serif;
+  }
+  .row .logol p {
+    color: whitesmoke;
+    font-family: "Saira Condensed", sans-serif;
+ }
+ .wallpaper .row .footer-colomn .logol .fa{
+    margin-left: 8px;
+ }
+ 
+  .footer .footer-colomn ul{
+    list-style: none;
+  }
+  
+  .footer-colomn3 .text-box p{
+    font-size: larger;
+    display: inline-block;
+    color: whitesmoke;
+    margin-top: 20px;
+  }
+  .footer-colomn4 h6{
+    color: whitesmoke;
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-style: 22px;
+    font-family: "Saira Condensed", sans-serif;
+  }
+  .footer-colomn4 ul li{
+    color: rgb(0, 255, 47);
+  }
+  .footer-colomn4 ul i{
+    color: black
+  }
+  .footer-colomn3 .text-box h7{
+    margin-bottom: 25px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-style: 22px;
+     font-family: Arial, Helvetica, sans-serif;
+  }
+  .footer-colomn3 .text-box p{
+    font-size: 15px;
+    color: rgba(0, 128, 0, 0.788);
+  }
+  
+  
+  .footer-colomn4 ul li{
+    padding: 10px 0;
+  }
+  .footer-colomn4 ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    opacity: 0.7s;
+    transition: 0.5s;
+  }
+  .footer-colomn4 ul li a:hover{
+    opacity: 1;
+    color: black;
+  }
+  .footer-colomn input{
+    border: none;
+    width: 250px;
+    height: 45px;
+    display: block;
+    padding-left: 20px;
+    margin: 14px 0;
+  }
+  .footer-colomn .InputSubmit{
+    padding: 8px 20px;
+    background-color: rgba(0, 128, 0, 0.788);
+    border: none;
+    color: white;
+  }
+  .rowl .coll p{
+    color: white;
+    padding-bottom: 10px;
+    justify-self: center;
+    text-align: center;
+  }
+  .row .socialIcons i{
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    margin: 0 15px;
+    transition: 0.5s;
+  }
+  .footer-colomn34 h8{
+    margin-left: 2px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-style: 22px;
+    font-family: "Saira Condensed", sans-serif;
+  }
+  .footer-colomn34 p{
+    color: whitesmoke;
+    font-size: 15px;
+  }
+
+  /* for partners*/
+.partner{
+    align-items: center;
+    text-align: center;
+    background: white;
+    margin-top: 100px;
+    
+  }
+  .partner h2{
+    font-size: 50px;
+  }
+  .partner .pic{
+    width: 150px;
+    padding: 20px;
+    height: 130px;
+    border-radius: 25px;
+    
+  }
+  .partner .pic:hover{
+    filter: grayscale(100%);
+    border: none;
+  }
+ 
+
+
+
+
+
+
+
+
+
+
+@media(max-width:991px){
+    header{
+        padding: 20px;
+    }
+    header label{
+        display: initial;
+    }
+    header .navbar{
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: whitesmoke;
+        border-top: 1px solid black;
+        display: none;
+    }
+
+    header .navbar ul li{
+        width: 100%;
+    }
+
+    header .navbar ul li ul{
+        position: relative;
+        width: 100%;
+    }
+    header .navbar ul li ul li{
+        background: whitesmoke;
+    }
+
+    #menu-bar:checked ~ .navbar{
+        display: initial;
+    }
+    .headis{
+        margin-top: 45px;
+        width: auto;
+        height:auto;
+    }
+    marquee{
+        font-size: 15px;
+    }
+    video{
+      width: 300px;
+      height: 200px;
+    
+    
+    }
+    article1:hover{
+      border: none;
+      background-color:;
+    }
+
+
+    .intro{
+        display: block;
+        height: 170vh;
+        margin-top: 100px;
+        padding-bottom: 500px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .intro p1{
+      width:200px;
+    }
+
+    .intro p{
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    
+  .hodpic{
+    width: 190px;
+  }
+    .read-more1 {
+     padding-bottom: 10px;
+     padding-left: 5px;
+    }
+    .art{
+        display: block;
+        width: 50%;
+        
+    }
+    .row{
+        display: block;
+    }
+    .partner{
+        display:block;
+       }
+       article1{
+        width: 389px;
+        
+       }
+
+
+       section .text-container{
+        display: block;
+      }
+    }
+  
+    .reveal {
+      position: relative;
+      opacity: 0;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+    }
+    .active.fade-top {
+      animation: fade-top .5s ease-in;
+    }
+    .active.fade-left {
+      animation: fade-left .5s ease-in;
+    }
+    .active.fade-bottom {
+      animation: fade-left .5s ease-in;
+    }
+    
+    @keyframes fade-top {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+      @keyframes fade-left {
+        0% {
+          transform: translateX(-100px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+    
+    }
+    @keyframes fade-bottom {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+      
+
+
+
